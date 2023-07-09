@@ -34,11 +34,14 @@ class WebLib
      */
     private static function getBanner($position)
     {
-        return Cache::remember('banner::' . $position, now()->addMinute(60), function () use ($position) {
-            return Banner::where('position', $position)
-                ->where('status', BaseModel::STATUS_ACTIVE)
-                ->with('detail')->first();
-        });
+//        return Cache::remember('banner::' . $position, now()->addMinute(60), function () use ($position) {
+//            return Banner::where('position', $position)
+//                ->where('status', BaseModel::STATUS_ACTIVE)
+//                ->with('detail')->first();
+//        });
+        return Banner::where('position', $position)
+            ->where('status', BaseModel::STATUS_ACTIVE)
+            ->with('detail')->first();
     }
 
     /**
