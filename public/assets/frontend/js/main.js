@@ -1,505 +1,601 @@
-$(document).ready(function ($) {
+(function ($) {
 	"use strict";
-	awe_backtotop();
-	awe_owl();
-	awe_category();
-	awe_tab();
 
+/*=============================================
+	=    		 Preloader			      =
+=============================================*/
+function preloader() {
+	$('#preloader').delay(0).fadeOut();
+};
 
-	$('.product-item-main .time').each(function(e){
-		awe_countDown($(this));
-	});
-
-	$('.details-pro .wrap_time .time').each(function(e){
-		awe_countDown2($(this));
-	});
-
-
-
-
-	if(navigator.userAgent.indexOf("Speed Insights") == -1) {
-		awe_lazyloadImage();
-	}
+$(window).on('load', function () {
+	preloader();
+	mainSlider();
+	mainSliderTwo();
+	wowAnimation();
 });
 
-$(document).on('click','.overlay, .close-popup, .btn-continue, .fancybox-close', function() {   
-	awe_hidePopup('.awe-popup'); 	
-	setTimeout(function(){
-		$('.loading').removeClass('loaded-content');
-	},500);
+
+/*=============================================
+	=    	   Toggle Active  	         =
+=============================================*/
+$('.cat-toggle').on('click', function () {
+	$('.category-menu').slideToggle(500);
 	return false;
+});
+$('.more_slide_open').slideUp();
+$('.more-categories').on('click', function () {
+	$(this).toggleClass('show');
+	$('.more_slide_open').slideToggle();
+});
+
+
+/*=============================================
+	=       Product Tooltip Active        =
+=============================================*/
+$(".tooltip-btn").click(function () {
+	$(".product-tooltip-item").removeClass("active"),
+		$(this).next().addClass("active"),
+		$(this).parents(".slider-two-item").addClass("active")
+});
+$(".product-tooltip-item .close-btn").click(function () {
+	$(this).parent().removeClass("active")
+});
+
+
+/*=============================================
+	=    		Mobile Menu			      =
+=============================================*/
+//SubMenu Dropdown Toggle
+if ($('.menu-area li.menu-item-has-children ul').length) {
+	$('.menu-area .navigation li.menu-item-has-children').append('<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>');
+
+}
+
+//Mobile Nav Hide Show
+if ($('.mobile-menu').length) {
+
+	var mobileMenuContent = $('.menu-area .main-menu').html();
+	$('.mobile-menu .menu-box .menu-outer').append(mobileMenuContent);
+
+	//Dropdown Button
+	$('.mobile-menu li.menu-item-has-children .dropdown-btn').on('click', function () {
+		$(this).toggleClass('open');
+		$(this).prev('ul').slideToggle(500);
+	});
+	//Menu Toggle Btn
+	$('.mobile-nav-toggler').on('click', function () {
+		$('body').addClass('mobile-menu-visible');
+	});
+
+	//Menu Toggle Btn
+	$('.menu-backdrop, .mobile-menu .close-btn').on('click', function () {
+		$('body').removeClass('mobile-menu-visible');
+	});
+}
+
+
+
+/*=============================================
+	=          Data Background               =
+=============================================*/
+$("[data-background]").each(function () {
+	$(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
 })
 
-/********************************************************
-# Countdown
-********************************************************/
-function awe_countDown(selector){
-	// Set the date we're counting down to
-	// Kiểu thời gian đặt tag endtime_4/15/2018 15:10:00
-	var dataTime = selector.attr('data-time');
-	var countDownDate = new Date(dataTime).getTime();
 
-	// Update the count down every 1 second
-	var x = setInterval(function() {
-		// Get todays date and time
-		var now = new Date().getTime();
-		// Find the distance between now an the count down date
-		var distance = countDownDate - now;
-		// Time calculations for days, hours, minutes and seconds
-		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		// Display the result in the element
-		selector.html("<span><i class='fa fa-bolt'></i> </span><span>"+days+"</span><span>ngày</span><span>"+hours+"</span>:<span>"+minutes+"</span>:<span>"+seconds+"</span>");
-		// If the count down is finished, write some text
+/*=============================================
+	=     Menu sticky & Scroll to top      =
+=============================================*/
+$(window).on('scroll', function () {
+	var scroll = $(window).scrollTop();
+	if (scroll < 370) {
+		$("#sticky-header").removeClass("sticky-menu");
+		$('.scroll-to-target').removeClass('open');
+
+	} else {
+		$("#sticky-header").addClass("sticky-menu");
+		$('.scroll-to-target').addClass('open');
+	}
+});
 
 
+/*=============================================
+	=    		 Scroll Up  	         =
+=============================================*/
+if ($('.scroll-to-target').length) {
+  $(".scroll-to-target").on('click', function () {
+    var target = $(this).attr('data-target');
+    // animate
+    $('html, body').animate({
+      scrollTop: $(target).offset().top
+    }, 1000);
 
-		if (distance < 0) {
-			clearInterval(x);
-			selector.html("<span>Hết hạn</span>");
-		}
-	}, 1000);
-}
-
-function awe_countDown2(selector){
-	// Set the date we're counting down to
-	// Kiểu thời gian đặt tag endtime_4/15/2018 15:10:00
-	var dataTime = selector.attr('data-time');
-	var countDownDate = new Date(dataTime).getTime();
-
-	// Update the count down every 1 second
-	var x = setInterval(function() {
-		// Get todays date and time
-		var now = new Date().getTime();
-		// Find the distance between now an the count down date
-		var distance = countDownDate - now;
-		// Time calculations for days, hours, minutes and seconds
-		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		// Display the result in the element
-		selector.html("<span><i class='fa fa-clock-o'></i> Deal còn lại </span> <span>"+days+"</span><span>ngày</span><span>"+hours+"</span>:<span>"+minutes+"</span>:<span>"+seconds+"</span>");
-		// If the count down is finished, write some text
-
-
-
-		if (distance < 0) {
-			clearInterval(x);
-			selector.html("<span>Hết hạn</span>");
-		}
-	}, 1000);
+  });
 }
 
 
-/**************** Function probar *********************/
 
-
-
-/********************************************************
-	# LazyLoad
-	********************************************************/
-function awe_lazyloadImage() {
-	var i = $("[data-lazyload]");
-	i.length > 0 && i.each(function() {
-		var i = $(this), e = i.attr("data-lazyload");
-		i.appear(function() {
-			i.removeAttr("height").attr("src", e);
-		}, {
-			accX: 0,
-			accY: 120
-		}, "easeInCubic");
+/*=============================================
+	=    		 Main Slider		      =
+=============================================*/
+function mainSlider() {
+	var BasicSlider = $('.slider-active');
+	BasicSlider.on('init', function (e, slick) {
+		var $firstAnimatingElements = $('.single-slider:first-child').find('[data-animation]');
+		doAnimations($firstAnimatingElements);
 	});
-	var e = $("[data-lazyload2]");
-	e.length > 0 && e.each(function() {
-		var i = $(this), e = i.attr("data-lazyload2");
-		i.appear(function() {
-			i.css("background-image", "url(" + e + ")");
-		}, {
-			accX: 0,
-			accY: 120
-		}, "easeInCubic");
+	BasicSlider.on('beforeChange', function (e, slick, currentSlide, nextSlide) {
+		var $animatingElements = $('.single-slider[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
+		doAnimations($animatingElements);
 	});
-} window.awe_lazyloadImage=awe_lazyloadImage;
-
-
-
-
-/********************************************************
-# SHOW NOITICE
-********************************************************/
-function awe_showNoitice(selector) {
-	$(selector).animate({right: '0'}, 500);
-	setTimeout(function() {
-		$(selector).animate({right: '-300px'}, 500);
-	}, 3500);
-}  window.awe_showNoitice=awe_showNoitice;
-
-/********************************************************
-# SHOW LOADING
-********************************************************/
-function awe_showLoading(selector) {
-	var loading = $('.loader').html();
-	$(selector).addClass("loading").append(loading); 
-}  window.awe_showLoading=awe_showLoading;
-
-/********************************************************
-# HIDE LOADING
-********************************************************/
-function awe_hideLoading(selector) {
-	$(selector).removeClass("loading"); 
-	$(selector + ' .loading-icon').remove();
-}  window.awe_hideLoading=awe_hideLoading;
-
-/********************************************************
-# SHOW POPUP
-********************************************************/
-function awe_showPopup(selector) {
-	$(selector).addClass('active');
-}  window.awe_showPopup=awe_showPopup;
-
-/********************************************************
-# HIDE POPUP
-********************************************************/
-function awe_hidePopup(selector) {
-	$(selector).removeClass('active');
-}  window.awe_hidePopup=awe_hidePopup;
-
-/********************************************************
-# CONVERT VIETNAMESE
-********************************************************/
-function awe_convertVietnamese(str) { 
-	str= str.toLowerCase();
-	str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ|à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ặ|ắ|ẵ|ẳ/g,"a"); 
-	str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ|è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
-	str= str.replace(/ì|í|ị|ỉ|ĩ|ì|í|ị|ỉ|ĩ|ì||ị|i/g,"i"); 
-	str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ|ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ở|ỡ|ợ/g,"o"); 
-	str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ|ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ|ừ/g,"u"); 
-	str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ|ỳ|ý|ỵ|ỹ|y/g,"y"); 
-	str= str.replace(/đ|đ/g,"d"); 
-	str= str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,"-");
-	str= str.replace(/-+-/g,"-");
-	str= str.replace(/^\-+|\-+$/g,""); 
-	return str; 
-} window.awe_convertVietnamese=awe_convertVietnamese;
-
-
-/********************************************************
-# SIDEBAR CATEOGRY
-********************************************************/
-function awe_category(){
-	$('.nav-category .fa-angle-down').click(function(e){
-		$(this).parent().toggleClass('active');
+	BasicSlider.slick({
+		autoplay: true,
+		autoplaySpeed: 5000,
+		dots: true,
+		fade: true,
+		arrows: false,
+		responsive: [
+			{ breakpoint: 767, settings: { dots: false, arrows: false } }
+		]
 	});
-} window.awe_category=awe_category;
 
-/********************************************************
-# MENU MOBILE
-********************************************************/
-function awe_menumobile(){
+	function doAnimations(elements) {
+		var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+		elements.each(function () {
+			var $this = $(this);
+			var $animationDelay = $this.data('delay');
+			var $animationType = 'animated ' + $this.data('animation');
+			$this.css({
+				'animation-delay': $animationDelay,
+				'-webkit-animation-delay': $animationDelay
+			});
+			$this.addClass($animationType).one(animationEndEvents, function () {
+				$this.removeClass($animationType);
+			});
+		});
+	}
+}
 
 
-} window.awe_menumobile=awe_menumobile;
+/*=============================================
+	=    		 Main Slider		      =
+=============================================*/
+function mainSliderTwo() {
+	var BasicSlider = $('.slider-active-two');
+	BasicSlider.on('init', function (e, slick) {
+		var $firstAnimatingElements = $('.single-slider:first-child').find('[data-animation]');
+		doAnimations($firstAnimatingElements);
+	});
+	BasicSlider.on('beforeChange', function (e, slick, currentSlide, nextSlide) {
+		var $animatingElements = $('.single-slider[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
+		doAnimations($animatingElements);
+	});
+	BasicSlider.slick({
+		autoplay: true,
+		autoplaySpeed: 5000,
+		dots: false,
+		fade: true,
+		arrows: true,
+		prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-arrow-left"></i></button>',
+		nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-arrow-right"></i></button>',
+		appendArrows: ".banner-nav",
+		responsive: [
+			{ breakpoint: 767, settings: { dots: false, arrows: false } }
+		]
+	});
 
-/********************************************************
-# ACCORDION
-********************************************************/
-function awe_accordion(){
-	$('.accordion .nav-link').click(function(e){
-		e.preventDefault;
-		$(this).parent().toggleClass('active');
-	})
-} window.awe_accordion=awe_accordion;
+	function doAnimations(elements) {
+		var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+		elements.each(function () {
+			var $this = $(this);
+			var $animationDelay = $this.data('delay');
+			var $animationType = 'animated ' + $this.data('animation');
+			$this.css({
+				'animation-delay': $animationDelay,
+				'-webkit-animation-delay': $animationDelay
+			});
+			$this.addClass($animationType).one(animationEndEvents, function () {
+				$this.removeClass($animationType);
+			});
+		});
+	}
+}
 
-/********************************************************
-# OWL CAROUSEL
-********************************************************/
-function awe_owl() { 
-	$('.owl-carousel:not(.not-dqowl)').each( function(){
-		var xs_item = $(this).attr('data-xs-items');
-		var md_item = $(this).attr('data-md-items');
-		var lg_item = $(this).attr('data-lg-items');
-		var sm_item = $(this).attr('data-sm-items');	
-		var margin=$(this).attr('data-margin');
-		var dot=$(this).attr('data-dot');
-		var nav=$(this).attr('data-nav');
-		var height=$(this).attr('data-height');
-		var play=$(this).attr('data-play');
-		var loop=$(this).attr('data-loop');
-		if (typeof margin !== typeof undefined && margin !== false) {    
-		} else{
-			margin = 30;
-		}
-		if (typeof xs_item !== typeof undefined && xs_item !== false) {    
-		} else{
-			xs_item = 1;
-		}
-		if (typeof sm_item !== typeof undefined && sm_item !== false) {    
 
-		} else{
-			sm_item = 3;
-		}	
-		if (typeof md_item !== typeof undefined && md_item !== false) {    
-		} else{
-			md_item = 3;
-		}
-		if (typeof lg_item !== typeof undefined && lg_item !== false) {    
-		} else{
-			lg_item = 3;
-		}
-		if (typeof dot !== typeof undefined && dot !== true) {   
-			dot= true;
-		} else{
-			dot = false;
-		}
-		$(this).owlCarousel({
-			loop:loop,
-			margin:Number(margin),
-			responsiveClass:true,
-			dots:dot,
-			nav:nav,
-			autoplay:play,
-			autoplayTimeout:3000,
-			autoplayHoverPause:true,
-			autoHeight:false,
-			responsive:{
-				0:{
-					items:Number(xs_item)				
-				},
-				600:{
-					items:Number(sm_item)				
-				},
-				1000:{
-					items:Number(md_item)				
-				},
-				1200:{
-					items:Number(lg_item)				
-				}
+/*=============================================
+	=    	 Slider Range Active  	         =
+=============================================*/
+$("#slider-range").slider({
+	range: true,
+	min: 40,
+	max: 600,
+	values: [40, 350],
+	slide: function (event, ui) {
+		$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+	}
+});
+$("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+
+/*=============================================
+	=    		Brand Active		      =
+=============================================*/
+$('.brand-active').slick({
+	dots: false,
+	infinite: true,
+	speed: 1500,
+	autoplay: true,
+	arrows: false,
+	slidesToShow: 7,
+	slidesToScroll: 2,
+	responsive: [
+		{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 5,
+				slidesToScroll: 1,
+				infinite: true,
 			}
-		})
-	})
-} window.awe_owl=awe_owl;
+		},
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 4,
+				slidesToScroll: 1
+			}
+		},
+		{
+			breakpoint: 767,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+		{
+			breakpoint: 575,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+	]
+});
 
-/********************************************************
-# BACKTOTOP
-********************************************************/
-function awe_backtotop() { 
-	if ($('#back-to-top').length) {
-		var scrollTrigger = 100, // px
-			backToTop = function () {
-				var scrollTop = $(window).scrollTop();
-				if (scrollTop > scrollTrigger) {
-					$('#back-to-top').addClass('show');
-				} else {
-					$('#back-to-top').removeClass('show');
-				}
-			};
-		backToTop();
-		$(window).on('scroll', function () {
-			backToTop();
-		});
-		$('#back-to-top').on('click', function (e) {
-			e.preventDefault();
-			$('html,body').animate({
-				scrollTop: 0
-			}, 700);
+
+
+/*=============================================
+	=    		Add-Banner Active		      =
+=============================================*/
+$('.banner-active').slick({
+	dots: true,
+	infinite: true,
+	speed: 1000,
+	autoplay: true,
+	arrows: false,
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	responsive: [
+		{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				infinite: true,
+			}
+		},
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1
+			}
+		},
+		{
+			breakpoint: 767,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+		{
+			breakpoint: 575,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+	]
+});
+
+
+
+/*=============================================
+	=    		Sell Active		   =
+=============================================*/
+$('.sell-active').slick({
+	dots: false,
+	infinite: true,
+	speed: 1000,
+	autoplay: true,
+	arrows: true,
+	prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-arrow-left"></i></button>',
+	nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-arrow-right"></i></button>',
+	appendArrows: ".sell-nav",
+	slidesToShow: 6,
+	slidesToScroll: 1,
+	responsive: [
+		{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 1,
+				infinite: true,
+			}
+		},
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 1
+			}
+		},
+		{
+			breakpoint: 767,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+		{
+			breakpoint: 575,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+	]
+});
+
+
+/*=============================================
+	=    		Sell Active		   =
+=============================================*/
+$('.wc-active').slick({
+	dots: false,
+	infinite: true,
+	speed: 1000,
+	autoplay: true,
+	arrows: true,
+	prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+	nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>',
+	appendArrows: ".wc-nav",
+	slidesToShow: 3,
+	slidesToScroll: 1,
+	responsive: [
+		{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 1,
+				infinite: true,
+			}
+		},
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 1
+			}
+		},
+		{
+			breakpoint: 767,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+		{
+			breakpoint: 575,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+	]
+});
+
+
+/*=============================================
+	=    		Arrivals Active		      =
+=============================================*/
+$('.arrivals-active').slick({
+	dots: true,
+	infinite: true,
+	speed: 2000,
+	autoplay: false,
+	arrows: false,
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	responsive: [
+		{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				infinite: true,
+			}
+		},
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1
+			}
+		},
+		{
+			breakpoint: 767,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+		{
+			breakpoint: 575,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+	]
+});
+
+
+/*=============================================
+	=    Popular-Product Active    =
+=============================================*/
+$('.popular-product-active').slick({
+	dots: false,
+	infinite: true,
+	speed: 1000,
+	autoplay: true,
+	arrows: false,
+	slidesToShow: 6,
+	slidesToScroll: 1,
+	responsive: [
+		{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 4,
+				slidesToScroll: 1,
+				infinite: true,
+			}
+		},
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 1
+			}
+		},
+		{
+			breakpoint: 767,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+		{
+			breakpoint: 575,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+			}
+		},
+	]
+});
+
+
+
+/*=============================================
+	=    		 Cart Active  	         =
+=============================================*/
+$(".cart-plus-minus").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
+$(".qtybutton").on("click", function () {
+	var $button = $(this);
+	var oldValue = $button.parent().find("input").val();
+	if ($button.text() == "+") {
+		var newVal = parseFloat(oldValue) + 1;
+	} else {
+		// Don't allow decrementing below zero
+		if (oldValue > 0) {
+			var newVal = parseFloat(oldValue) - 1;
+		} else {
+			newVal = 0;
+		}
+	}
+	$button.parent().find("input").val(newVal);
+});
+
+
+
+/*=============================================
+	=    	  Countdown Active  	         =
+=============================================*/
+$('[data-countdown]').each(function () {
+	var $this = $(this), finalDate = $(this).data('countdown');
+	$this.countdown(finalDate, function (event) {
+		$this.html(event.strftime('<div class="time-count day"><span>%D</span><strong>Days</strong> </div><div class="time-count hour"><span>%H</span><strong>hrs</strong></div><div class="time-count min"><span>%M</span><strong>min</strong></div><div class="time-count sec"><span>%S</span><strong>sec</strong></div>'));
+	});
+});
+
+
+
+/*=============================================
+	=            Custom Scroll            =
+=============================================*/
+$(window).on("load", function () {
+	if ($(".navigation .scroll, .recommended.scroll").length) {
+			$(".navigation .scroll, .recommended.scroll").mCustomScrollbar({
+			mouseWheelPixels: 50,
+			scrollInertia: 0,
 		});
 	}
-} window.awe_backtotop=awe_backtotop;
-
-/********************************************************
-# TAB
-********************************************************/
-function awe_tab() {
-	$(".e-tabs:not(.not-dqtab)").each( function(){
-		$(this).find('.tabs-title li:first-child').addClass('current');
-		$(this).find('.tab-content').first().addClass('current');
-
-		$(this).find('.tabs-title li').click(function(){
-			var tab_id = $(this).attr('data-tab');
-			var url = $(this).attr('data-url');
-			$(this).closest('.e-tabs').find('.tab-viewall').attr('href',url);
-			$(this).closest('.e-tabs').find('.tabs-title li').removeClass('current');
-			$(this).closest('.e-tabs').find('.tab-content').removeClass('current');
-			$(this).addClass('current');
-			$(this).closest('.e-tabs').find("#"+tab_id).addClass('current');
-		});    
-	});
-} window.awe_tab=awe_tab;
+});
 
 
-/**Tab click mobile*/
-$(".not-tab").each( function(e){
-	/*khai báo cho chức năng dành cho mobile tab*/
-	var _this = $(this).find('.wrap_tab .button_show_tab');
-	var droptab = $(this).find('.link_tab_check_click');
-	$(_this).click(function(){ 
-		if ($(droptab).hasClass('opensit')) {
-			$(droptab).addClass('closeit').removeClass('opensit');
-		}else {
-			$(droptab).addClass('opensit').removeClass('closeit');
+/*=============================================
+	=    		Isotope	Active  	      =
+=============================================*/
+$('.flash-isotope-active').imagesLoaded(function () {
+	// init Isotope
+	var $grid = $('.flash-isotope-active,.flash-isotope-active-two').isotope({
+		itemSelector: '.grid-item',
+		percentPosition: true,
+		masonry: {
+			columnWidth: '.grid-item',
 		}
 	});
-});
-
-
-/********************************************************
-# DROPDOWN
-********************************************************/
-$('.dropdown-toggle').click(function() {
-	$(this).parent().toggleClass('open'); 	
-}); 
-$('.btn-close').click(function() {
-	$(this).parents('.dropdown').toggleClass('open');
-}); 
-$('body').click(function(event) {
-	if (!$(event.target).closest('.dropdown').length) {
-		$('.dropdown').removeClass('open');
-	};
-});
-
-
-
-
-
-/************************************/
-/*Show hide Recoverpass*/
-$('.recv-text #rcv-pass').click(function(){
-	$('.form_recover_').slideToggle('500');
-});
-/*End*/
-
-$('a.btn-support').click(function(e){
-	e.stopPropagation();
-	$('.support-content').slideToggle();
-});
-$('.support-content').click(function(e){
-	e.stopPropagation();
-});
-$(document).click(function(){
-	$('.support-content').slideUp();
-});
-/*dang ky*/
-$(".accept_submit input").click(function() {
-	if($(this).is(":checked"))
-	{
-		$('.button_register').removeAttr('disabled');
-	}else {
-		$('.button_register').attr('disabled', 'disabled');
-	}
-});
-
-
-
-/***************************************/
-
-
-$(document).ready(function(){
-	var wDW = $(window).width();
-	/*Footer*/
-	if(wDW > 767){
-		$('.toggle-mn').show();
-	}else {
-		$('.footer-click > .cliked').click(function(){
-			$(this).toggleClass('open_');
-			$(this).next('ul').slideToggle("fast");
-			$(this).next('div').slideToggle("fast");
-		});
-	}
-	if (wDW > 300) {
-		$(".filter-group li span label").click(function(){
-			$('.dqdt-sidebar').removeClass('openf');
-			$('.open-filters').removeClass('openf');
-			$('.opacity_filter').removeClass('opacity_filter_true');
-		});
-		$('.opacity_filter').click(function(e){
-			$('.dqdt-sidebar').removeClass('openf');
-			$('.open-filters').removeClass('openf');
-			$('.opacity_filter').removeClass('opacity_filter_true');
-		});
-	}
-	if (wDW > 992) {
-		$(".button_clicked").click(function(){ 
-			$('.search_pc').slideToggle('fast');
-		})
-	}
-});
-$('.cate_padding  li .fa').click(function() {
-	$(this).closest('li').find('> ul').slideToggle("fast");
-	$(this).closest('i').toggleClass('fa-caret-down fa-caret-up');
-	return false;              
-}); 
-/*Open filter*/
-$('.open-filters').click(function(e){
-	e.stopPropagation();
-	$(this).toggleClass('openf');
-	$('.opacity_filter').toggleClass('opacity_filter_true');
-	$('.dqdt-sidebar').toggleClass('openf');
-});
-
-/*Menu mobile*/
-$('.menu-bar').click(function(e){
-	e.stopPropagation();
-	$('.menu_mobile').toggleClass('open_sidebar_menu');
-	$('.opacity_menu').toggleClass('open_opacity');
-});
-
-$('.ul_collections li > .fa').click(function(){
-	$(this).parent().toggleClass('current');
-	$(this).toggleClass('fa-angle-down fa-angle-up');
-	$(this).next('ul').slideToggle("fast");
-	$(this).next('div').slideToggle("fast");
-});
-
-
-$('.opacity_menu').click(function(e){
-	$('.menu_mobile').removeClass('open_sidebar_menu');
-	$('.opacity_menu').removeClass('open_opacity');
-});
-$('.ct-mobile li .ti-plus').click(function() {
-	$(this).closest('li').find('> .sub-menu').slideToggle("fast");
-	$(this).closest('i').toggleClass('show_open hide_close');
-	return false;              
-});
-
-
-
-
-
-
-
-/*********************Login register modal **********************/
-$(document).ready(function(){
-	$('.op_login').click(function(e){
-		$('.op_login').removeClass('op_login_true');
-		$('.modal_dichvu').hide();
+	// filter items on button click
+	$('.product-menu-nav').on('click', 'button', function () {
+		var filterValue = $(this).attr('data-filter');
+		$grid.isotope({ filter: filterValue });
 	});
-	$('#closed_dichvu').on('click', function(e){
-		e.preventDefault();
-		$('.op_login').removeClass('op_login_true');
-		$('.modal_dichvu').hide();
+
+});
+//for menu active class
+	$('.product-menu-nav button,.shop-details-color li,.color-wrap li').on('click', function (event) {
+	$(this).siblings('.active').removeClass('active');
+	$(this).addClass('active');
+	event.preventDefault();
+});
+
+
+/*=============================================
+	=    		 Wow Active  	         =
+=============================================*/
+function wowAnimation() {
+	var wow = new WOW({
+		boxClass: 'wow',
+		animateClass: 'animated',
+		offset: 0,
+		mobile: false,
+		live: true
 	});
-	var test = $('.guilienhe_thanhcong').text();
-	if (test != '') {
-		$('#datlich_thanhcong').modal();
-	}
-});
+	wow.init();
+}
 
 
-
-
-$(window).on("load resize scroll",function(e){ 
-	var wDW = $(window).width();
-	setTimeout(function(){
-		var get_height = $('.col_get_height').height(),
-			bakground = $('.wrap_danhgia');
-
-		$(bakground).css('min-height', get_height - '12');
-
-	},500);
-
-
-
-});
+})(jQuery);

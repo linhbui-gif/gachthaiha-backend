@@ -30,7 +30,7 @@ class HomeController extends Controller
         $promoteProduct = Product::orderBy('id', 'desc')->where('status', BaseModel::STATUS_ACTIVE)->limit(12)->get();
         $hotProduct = Product::orderBy('id', 'desc')->where('status', BaseModel::STATUS_ACTIVE)->limit(12)->get();
 
-        $hotNews = News::orderBy('id', 'DESC')->limit(4)->get();
+        $hotNews = News::orderBy('id', 'DESC')->limit(6)->get();
         $listNews = News::orderBy('id', 'DESC')->limit(6)->offset(4)->get();
 
         $hotProductCategory = ProductCategory::orderBy('id', 'DESC')->where('is_hot', BaseModel::STATUS_ACTIVE)->limit(3)->get();
