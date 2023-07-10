@@ -7,7 +7,7 @@
                     <div class="header_topbar_info">
                         <div class="header_offer"><span>GẠCH ỐP LÁT THÁI HÀ</span></div>
                         <div class="header_offer"><span><i class="fa fa-clock mr-2"></i>8:30 - 17:30</span></div>
-                        <div class="header_offer"><span><i class="fa fa-phone mr-2"></i>0904506621</span></div>
+                        <div class="header_offer"><span><i class="fa fa-phone mr-2"></i>{{ \App\Libs\WebLib::getSetting(\App\Models\Setting::HOT_LINE_NUMBER) }}</span></div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-4">
@@ -24,7 +24,7 @@
     <div class="header-wrap-body">
         <div class="middle-header dark_skin">
             <div class="container">
-                <div class="nav_block"><a class="navbar-brand" href="index.html"><img class="logo_light" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"><img class="logo_dark" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"></a>
+                <div class="nav_block"><a class="navbar-brand" href="/"><img class="logo_light" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"><img class="logo_dark" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"></a>
                     <div class="contact_phone order-md-last"><i class="linearicons-phone-wave"></i><span>0904506621-0904506622</span></div>
                     <div class="product_search_form">
                         <form>
@@ -43,36 +43,26 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false"><span class="ion-android-menu"></span></button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li class="dropdown dropdown-mega-menu"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Thương hiệu</a>
+
+                            <li class="dropdown dropdown-mega-menu">
+                                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Thương hiệu</a>
                                 <div class="dropdown-menu">
                                     <ul class="mega-menu d-lg-flex">
+                                        @foreach(\App\Models\Brand::$listType as $typeKey => $typeName)
                                         <li class="mega-menu-col col-lg-4">
                                             <ul>
-                                                <li class="dropdown-header">Bán chạy</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch catana</a></li>
+                                                <li class="dropdown-header">{{ $typeName }}</li>
+                                                @php
+                                                    $listBrand = \App\Libs\WebLib::getBrandByType($typeKey);
+                                                @endphp
+                                                @if(!empty($listBrand))
+                                                    @foreach($listBrand as $key => $value)
+                                                     <li><a class="dropdown-item nav-link nav_item" href="{{ route('web.product.brand', ['link' => $value->link]) }}">{{ $value->name }}</a></li>
+                                                    @endforeach
+                                                @endif
                                             </ul>
                                         </li>
-                                        <li class="mega-menu-col col-lg-4">
-                                            <ul>
-                                                <li class="dropdown-header">Phổ biến</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-col col-lg-4">
-                                            <ul>
-                                                <li class="dropdown-header">Gạch khác</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                            </ul>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </li>
@@ -82,28 +72,28 @@
                                         <li class="mega-menu-col col-lg-4">
                                             <ul>
                                                 <li class="dropdown-header">Bán chạy</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch catana</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch catana</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch catana</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch catana</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch catana</a></li>
                                             </ul>
                                         </li>
                                         <li class="mega-menu-col col-lg-4">
                                             <ul>
                                                 <li class="dropdown-header">Phổ biến</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
                                             </ul>
                                         </li>
                                         <li class="mega-menu-col col-lg-4">
                                             <ul>
                                                 <li class="dropdown-header">Gạch khác</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Gạch bạch mã</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
+                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -112,60 +102,60 @@
                             <li class="dropdown"><a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#">Gạch trang trí</a>
                                 <div class="dropdown-menu">
                                     <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Gạch sân vườn</a>
                                 <div class="dropdown-menu">
                                     <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Ngói lợp</a>
                                 <div class="dropdown-menu">
                                     <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Phụ kiện</a>
                                 <div class="dropdown-menu">
                                     <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Sản phẩm khác</a>
                                 <div class="dropdown-menu">
                                     <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Sàn gỗ</a>
                                 <div class="dropdown-menu">
                                     <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="index.html">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
+                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
                                     </ul>
                                 </div>
                             </li>
