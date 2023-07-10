@@ -105,3 +105,8 @@
   -moz-animation-fill-mode: none;
   -o-animation-fill-mode: none;
   animation-fill-mode: none; }
+.widget_categories{
+  max-height: 120px;
+  overflow-y: auto;
+  min-height: 50px;
+}

@@ -46,11 +46,19 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         $request->status = BaseModel::STATUS_ACTIVE;
+        $prices = $request->price;
+        if(!empty($prices)){
+            foreach ($prices as $k => $price){
+                $dataExplodePrice = explode("-", $price);
+                $request->from_price = $dataExplodePrice[0];
+                $request->to_price = $dataExplodePrice[1];
+            }
+        }
         $listProduct = Product::getList($request);
-
         $html = view('web.product.ajax_filter', compact('listProduct'));
         return response()->json([
-            'success' => true, 'message' => 'Fiter success',
+            'success' => true,
+            'message' => 'Filter success',
             'html' => $html->render()
         ]);
     }

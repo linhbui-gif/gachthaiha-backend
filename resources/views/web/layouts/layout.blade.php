@@ -37,6 +37,98 @@
 
 </head>
 <body>
+<!-- LOADER-->
+<!--.preloader-->
+<div class="spinner">
+    <div class="loader-div">
+  <span class="loader">
+    <span></span>
+    <span></span>
+  </span>
+    </div>
+</div>
+<style>
+.spinner{
+    display: none;
+    width: 100%;
+}
+    .loader-div {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #0000006e;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999999;
+    }
+
+    .loader {
+        position: relative;
+        width: 10vw;
+        height: 5vw;
+        padding: 1.5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loader span {
+        position: absolute;
+        height: 0.8vw;
+        width: 0.8vw;
+        border-radius: 50%;
+        background-color: #ff0;
+    }
+
+    .loader span:nth-child(1) {
+        animation: loading-dotsA 0.5s infinite linear;
+    }
+
+    .loader span:nth-child(2) {
+        animation: loading-dotsB 0.5s infinite linear;
+    }
+
+    @keyframes loading-dotsA {
+        0% {
+            transform: none;
+        }
+        25% {
+            transform: translateX(2vw);
+        }
+        50% {
+            transform: none;
+        }
+        75% {
+            transform: translateY(2vw);
+        }
+        100% {
+            transform: none;
+        }
+    }
+
+    @keyframes loading-dotsB {
+        0% {
+            transform: none;
+        }
+        25% {
+            transform: translateX(-2vw);
+        }
+        50% {
+            transform: none;
+        }
+        75% {
+            transform: translateY(-2vw);
+        }
+        100% {
+            transform: none;
+        }
+    }
+
+</style>
+<!-- END LOADER-->
     @include('web.elements.header')
     <main class="main_content">
     @yield('content')
@@ -74,42 +166,42 @@
     <script src="{{ asset('assets/frontend/js/scripts.js') }}"></script>
 @yield('script')
 
-<script type="text/javascript" language="JavaScript">
-    $(document).ready(function () {
-        $('.brand_carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 1,
-                    nav: true
-                },
-                600: {
-                    items: 3,
-                    nav: false,
-                    loop: true
-                },
-                1000: {
-                    items: 6,
-                    nav: false,
-                    loop: true
-                }
-            }
-        });
+{{--<script type="text/javascript" language="JavaScript">--}}
+{{--    $(document).ready(function () {--}}
+{{--        $('.brand_carousel').owlCarousel({--}}
+{{--            loop: true,--}}
+{{--            margin: 10,--}}
+{{--            responsiveClass: true,--}}
+{{--            responsive: {--}}
+{{--                0: {--}}
+{{--                    items: 1,--}}
+{{--                    nav: true--}}
+{{--                },--}}
+{{--                600: {--}}
+{{--                    items: 3,--}}
+{{--                    nav: false,--}}
+{{--                    loop: true--}}
+{{--                },--}}
+{{--                1000: {--}}
+{{--                    items: 6,--}}
+{{--                    nav: false,--}}
+{{--                    loop: true--}}
+{{--                }--}}
+{{--            }--}}
+{{--        });--}}
 
-        var menuPosition = $('.main-nav').position().top;
-        $(window).scroll(function () {
-            var scrollTop = $(window).scrollTop();
-            console.log(menuPosition + ' ' + scrollTop);
-            if(scrollTop >= menuPosition){
-                $('.main-nav').addClass('menu_fixed');
-            }else{
-                $('.main-nav').removeClass('menu_fixed');
-            }
-        });
-    });
-</script>
+{{--        var menuPosition = $('.main-nav').position().top;--}}
+{{--        $(window).scroll(function () {--}}
+{{--            var scrollTop = $(window).scrollTop();--}}
+{{--            console.log(menuPosition + ' ' + scrollTop);--}}
+{{--            if(scrollTop >= menuPosition){--}}
+{{--                $('.main-nav').addClass('menu_fixed');--}}
+{{--            }else{--}}
+{{--                $('.main-nav').removeClass('menu_fixed');--}}
+{{--            }--}}
+{{--        });--}}
+{{--    });--}}
+{{--</script>--}}
 
 </body>
 </html>
