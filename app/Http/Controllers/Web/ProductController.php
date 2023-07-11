@@ -197,7 +197,7 @@ class ProductController extends Controller
      */
     public function search(Request $request)
     {
-        $listProduct = Product::where('name', 'like', '%'.$request->get('q').'%')->orderBy('id', 'desc')
+        $listProduct = Product::where('name', 'like', '%'.$request->get('keyword').'%')->orderBy('id', 'desc')
             ->where('status', BaseModel::STATUS_ACTIVE)->paginate(12);
 
 
