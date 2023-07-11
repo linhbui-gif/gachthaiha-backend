@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-8">
                     <div class="header_topbar_info">
-                        <div class="header_offer"><span>GẠCH ỐP LÁT THÁI HÀ</span></div>
+                        <div class="header_offer"><span>{{ \App\Libs\WebLib::getSetting(\App\Models\Setting::ADDRESS) }}</span></div>
                         <div class="header_offer"><span><i class="fa fa-clock mr-2"></i>8:30 - 17:30</span></div>
                         <div class="header_offer"><span><i class="fa fa-phone mr-2"></i>{{ \App\Libs\WebLib::getSetting(\App\Models\Setting::HOT_LINE_NUMBER) }}</span></div>
                     </div>
@@ -25,7 +25,7 @@
         <div class="middle-header dark_skin">
             <div class="container">
                 <div class="nav_block"><a class="navbar-brand" href="/"><img class="logo_light" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"><img class="logo_dark" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"></a>
-                    <div class="contact_phone order-md-last"><i class="linearicons-phone-wave"></i><span>0904506621-0904506622</span></div>
+                    <div class="contact_phone order-md-last"><i class="linearicons-phone-wave"></i><span>{{ \App\Libs\WebLib::getSetting(\App\Models\Setting::HOT_LINE_NUMBER) }}</span></div>
                     <div class="product_search_form">
                         <form>
                             <div class="input-group">
@@ -66,39 +66,28 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="dropdown dropdown-mega-menu"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Gạch lát nền</a>
-                                <div class="dropdown-menu">
-                                    <ul class="mega-menu d-lg-flex">
-                                        <li class="mega-menu-col col-lg-4">
-                                            <ul>
-                                                <li class="dropdown-header">Bán chạy</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch catana</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch catana</a></li>
+                            @php $listCategory = \App\Libs\WebLib::getParentProductCategory(); @endphp
+                            @if(!empty($listCategory))
+                                @foreach($listCategory as $key => $value)
+                                    @php $href = route('web.product.category', ['link' => $value->link]); @endphp
+                                    <li class="dropdown @if(!$value->child->isEmpty()) dropdown-mega-menu @endif">
+                                        <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"> {{ $value->name }}</a>
+                                        @if(!$value->child->isEmpty())
+                                        <div class="dropdown-menu">
+                                            <ul class="mega-menu d-lg-flex">
+                                                <li class="mega-menu-col col-lg-4">
+                                                    <ul>
+                                                        <li class="dropdown-header">Bán chạy</li>
+                                                        @foreach($value->child as $k => $v)
+                                                        <li><a class="dropdown-item nav-link nav_item" href="{{ route('web.product.category', ['link' => $v->link]) }}">{{ $v->name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
                                             </ul>
-                                        </li>
-                                        <li class="mega-menu-col col-lg-4">
-                                            <ul>
-                                                <li class="dropdown-header">Phổ biến</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-col col-lg-4">
-                                            <ul>
-                                                <li class="dropdown-header">Gạch khác</li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
-                                                <li><a class="dropdown-item nav-link nav_item" href="/">Gạch bạch mã</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+                                        </div>
+                                        @endif
+                                    </li>
+                               
                             <li class="dropdown"><a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#">Gạch trang trí</a>
                                 <div class="dropdown-menu">
                                     <ul>
@@ -159,20 +148,22 @@
                                     </ul>
                                 </div>
                             </li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                     <ul class="navbar-nav attr-nav align-items-center">
                         <li><a class="nav-link search_trigger" href="javascript:void(0);"><i class="linearicons-magnifier"></i></a>
                             <div class="search_wrap"><span class="close-search"><i class="ion-ios-close-empty"></i></span>
-                                <form>
-                                    <input class="form-control" id="search_input" type="text" placeholder="Search">
+                                <form method="get" action="{{route('web.product.search')}}">
+                                    <input class="form-control" name="keyword" id="search_input" type="text" placeholder="Search">
                                     <button class="search_icon" type="submit"><i class="ion-ios-search-strong"></i></button>
                                 </form>
                             </div>
                             <div class="search_overlay"></div>
                             <div class="search_overlay"></div>
                         </li>
-                        <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
+                        <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">{{\Gloudemans\Shoppingcart\Cart::count()}}</span></a>
                             <div class="cart_box dropdown-menu dropdown-menu-right">
                                 <ul class="cart_list">
                                     <li><a class="item_remove" href="#"><i class="ion-close"></i></a><a href="#"><img src="assets/images/cart_thamb1.jpg" alt="cart_thumb1">Variable product 001</a><span class="cart_quantity">1 x<span class="cart_amount"><span class="price_symbole">$</span></span>78.00</span></li>
