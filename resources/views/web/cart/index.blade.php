@@ -1,173 +1,126 @@
 @extends('web.layouts.layout')
 @section('title', 'Giỏ hàng')
 @section('content')
-    <div class="breadcrumb_background">
-        <div class="title_full">
-            <div class="container a-center">
-                <p class="title_page_breadcrumb">Giỏ hàng của bạn</p>
-            </div>
-        </div>
-        <section class="bread-crumb">
-            <span class="crumb-border"></span>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 a-left">
-                        <ul class="breadcrumb" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                            <li class="home">
-                                <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
-                                <span class="mr_lr">&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</span>
-                            </li>
-                            <li><strong><span itemprop="title">Giỏ hàng của bạn</span></strong></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <p class="checktext_forbuy"></p>
-    <section class="wrap_page">
+    <?php
+    $breadCrumbList = [
+        "Trang chủ",
+        "Giỏ hàng",
+    ]
+    ?>
+    @include('web.breadcrumb.breadcrumb',['breadcrumbList' => $breadCrumbList, 'title' => 'Giỏ hàng'])
+
+    <div class="section">
         <div class="container">
+            <form action="{{ route('web.cart.index') }}" method="post" novalidate="" class="margin-bottom-0">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="page_title">
-                        <h1 class="title_page_h1">Giỏ hàng của bạn</h1>
-                    </div>
-                    <div class="header-cart title_cart_pc hidden-sm hidden-xs"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="main-cart-page main-container col1-layout">
-        <div class="main container hidden-xs hidden-sm">
-            <div class="col-main cart_desktop_page cart-page">
-                <div class="cart page_cart hidden-xs">
-                    <form action="{{ route('web.cart.index') }}" method="post" novalidate="" class="margin-bottom-0">
-                        <div class="bg-scroll">
-                            <div class="cart-thead">
-                                <div style="width: 18%" class="a-center">Ảnh sản phẩm</div>
-                                <div style="width: 32%" class="a-center">Tên sản phẩm</div>
-                                <div style="width: 17%" class="a-center"><span class="nobr">Đơn giá</span></div>
-                                <div style="width: 14%" class="a-center">Số lượng</div>
-                                <div style="width: 14%" class="a-center">Thành tiền</div>
-                                <div style="width: 5%" class="a-center">Xoá</div>
-                            </div>
-                            <div class="cart-tbody">
-                                <?php $cart = Cart::content();
-                                $totalAmount = 0;
-                                ?>
-                                @if(!$cart->isEmpty())
-                                    @foreach($cart as $key => $value)
-                                        <?php $href = route('web.product.detail', ['link' => $value->model->link]); ?>
-                                        <div class="item-cart productid-1034664910">
-                                            <div style="width: 18%" class="image">
-                                                <a class="product-image" title="{{ $value->name }}" href="{{ $href }}">
-                                                    <img width="75" height="auto" alt="{{ $value->name }}"
-                                                         src="{{ $value->model->image }}">
-                                                </a>
-                                            </div>
-                                            <div style="width: 32%" class="a-center">
-                                                <h3 class="product-name">
-                                                    <a
-                                                        class="text2line" href="{{ $href }}">{{ $value->name }}</a>
-                                                </h3>
-                                                <span class="variant-title"></span>
-                                            </div>
-                                            <div style="width: 17%" class="a-center">
-                                                    <span class="item-price">
-                                                        <span class="price">{{ number_format($value->price) }}₫</span>
-                                                    </span>
-                                            </div>
-                                            <div style="width: 14%" class="a-center">
-                                                <div class="input_qty_pr">
-                                                    <input class="variantID" type="hidden" name="Id"
-                                                           value="{{ $value->rowId }}">
-                                                    <input type="text" maxlength="3"  min="1"
-                                                           class="input_qty check_number_here input-text number-sidebar input_pop input_pop qtyItem{{ $value->rowId }}"
-                                                           id="qtyItem{{ $value->rowId }}"
-                                                           data-id="{{ $value->rowId }}"
-                                                           name="Lines" size="4"
-                                                           value="{{ $value->qty }}">
-                                                    <button
-                                                        onclick="var result = document.getElementById('qtyItem{{ $value->rowId }}'); var qtyItem{{ $value->rowId }} = result.value; if( !isNaN( qtyItem{{ $value->rowId }} )) result.value++;return false;"
-                                                        class="increase_pop items-count btn-plus" type="button">+
-                                                    </button>
-                                                    <button
-                                                        onclick="var result = document.getElementById('qtyItem{{ $value->rowId }}'); var qtyItem{{ $value->rowId }} = result.value; if( !isNaN( qtyItem{{ $value->rowId }} ) &amp;&amp; qtyItem{{ $value->rowId }} > 1 ) result.value--;return false;"
-                                                        disabled="" class="reduced_pop items-count btn-minus"
-                                                        type="button">-
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div style="width: 14%" class="a-center">
-                                                    <span class="cart-price">
-                                                        @php
-                                                            $amount = $value->qty * $value->price;
-                                                            $totalAmount += $amount;
-                                                        @endphp
-                                                        <span class="price">{{ number_format($amount) }}₫</span>
-                                                    </span>
-                                            </div>
-                                            <div style="width: 5%" class="a-center">
-                                                <a
-                                                   title="Xóa"
-                                                   href="{{ route('web.cart.delete', ['id' => $value->rowId]) }}"
-                                                   data-id="{{ $value->rowId }}">
-                                                        <span>
-                                                            <i class="fa fa-trash-o"></i>
-                                                        </span>
-                                                </a>
-                                            </div>
+                <div class="col-12">
+                    <div class="table-responsive shop_cart_table">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="product-thumbnail">Ảnh sản phẩm</th>
+                                <th class="product-name">Tên sản phẩm</th>
+                                <th class="product-price">Đơn giá</th>
+                                <th class="product-quantity">Số lượng</th>
+                                <th class="product-subtotal">Số lượng</th>
+                                <th class="product-remove">Xoá</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $cart = Cart::content();
+                            $totalAmount = 0;
+                            ?>
+                            @if(!$cart->isEmpty())
+                                @foreach($cart as $key => $value)
+                                <?php $href = route('web.product.detail', ['link' => $value->model->link]); ?>
+                                 <tr>
+                                <td class="product-thumbnail"><a title="{{ $value->name }}" href="{{ $href }}">
+                                        <img alt="{{ $value->name }}"
+                                             src="{{ $value->model->image }}"></a></td>
+                                <td class="product-name" data-title="Product"><a href="{{ $href }}">{{ $value->name }}</a></td>
+                                <td class="product-price" data-title="Price">{{ number_format($value->price) }}₫</td>
+                                <td class="product-quantity" data-title="Quantity">
+                                    <div class="quantity input_qty_pr">
+                                        <input
+                                                type="button"
+                                                value="-"
+                                                class="minus"
+                                                onclick="var result = document.getElementById('qtyItem{{ $value->rowId }}'); var qtyItem{{ $value->rowId }} = result.value; if( !isNaN( qtyItem{{ $value->rowId }} ) &amp;&amp; qtyItem{{ $value->rowId }} > 1 ) result.value--;return false;"
+                                        >
+                                        <input
+                                                id="qtyItem{{ $value->rowId }}"
+                                                data-id="{{ $value->rowId }}"
+                                                type="text"
+                                                name="quantity"
+                                                value="{{ $value->qty }}"
+                                                title="Qty"
+                                                class="qty input_qty qtyItem{{ $value->rowId }}"
+                                                size="4"
+                                        >
+                                        <input
+                                                type="button"
+                                                value="+"
+                                                class="plus"
+                                                onclick="var result = document.getElementById('qtyItem{{ $value->rowId }}'); var qtyItem{{ $value->rowId }} = result.value; if( !isNaN( qtyItem{{ $value->rowId }} )) result.value++;return false;"
+                                        >
+                                    </div>
+                                </td>
+                                     @php
+                                         $amount = $value->qty * $value->price;
+                                         $totalAmount += $amount;
+                                     @endphp
+                                <td class="product-subtotal" data-title="Total">{{ number_format($amount) }}₫</td>
+                                <td class="product-remove" data-title="Remove"><a href="{{ route('web.cart.delete', ['id' => $value->rowId]) }}"
+                                                                                  data-id="{{ $value->rowId }}"><i class="ti-close"></i></a></td>
+                            </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="6" class="px-0">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-lg-8 col-md-6 text-left text-md-right">
+                                            <button class="btn btn-line-fill btn-sm" type="submit">Update Cart</button>
                                         </div>
-                                    @endforeach
-                                @endif
-                            </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </form>
+            <div class="row">
+                <div class="col-12">
+                    <div class="medium_divider"></div>
+                    <div class="divider center_icon"><i class="ti-shopping-cart-full"></i></div>
+                    <div class="medium_divider"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="border p-3 p-md-4">
+                        <div class="heading_s1 mb-3">
+                            <h6>Cart Totals</h6>
                         </div>
-                    </form>
-                    <div class="row margin-top-20  margin-bottom-40">
-                        <div class="col-lg-7 col-md-7">
-                            <div class="form-cart-button">
-                                <div class="">
-                                    <a href="{{ route('web.product.index') }}" class="form-cart-continue">Tiếp tục mua
-                                        hàng</a>
-                                </div>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td class="cart_total_label">Tạm tính</td>
+                                    <td class="cart_total_amount"><strong>{{ number_format($totalAmount) }}₫</strong></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="col-lg-5 col-md-5 bg_cart shopping-cart-table-total">
-                            <div class="table-total">
-                                <table class="table ">
-                                    <tbody>
-                                    <tr>
-                                        <td class="total-text">Tạm tính</td>
-                                        <td class="txt-right totals_price price_end a-right">{{ number_format($totalAmount) }}₫</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="{{ route('web.cart.checkout') }}" class="btn-checkout-cart button_checkfor_buy">
-                                Tiến hành thanh toán
-                            </a>
-                        </div>
+                        <a href="{{ route('web.cart.checkout') }}" class="btn btn-fill-out">Tiến hành thanh toán</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="cart-mobile hidden-md hidden-lg container">
-            <form action="/cart" method="post" novalidate="" class="margin-bottom-0">
-                <div class="title_cart_mobile">
-
-                </div>
-
-                <div class="header-cart-content" style="background:#fff;">
-
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </section>
+    </div>
 @endsection
 
 

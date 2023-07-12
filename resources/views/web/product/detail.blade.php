@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                     <div class="cart_btn mt-2">
-                                        <button class="btn btn-fill-out btn-addtocart btn-cart2" type="button"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</button>
+                                        <button class="btn btn-fill-out btn-addtocart btn-cart2" type="submit"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</button>
                                     </div>
                                     <div class="cart_btn mt-2">
                                         <button class="btn btn-facebook" type="button" style="color:white"> Báo giá công trình</button>
@@ -197,7 +197,7 @@
                     data: $(this).serialize(),
                     success: function(res){
                         if(res.success){
-                            $('.cartCount').text(res.number_product);
+                            $('.cart_count').text(res.number_product);
                             alert('Thêm sản phẩm vào giỏ hàng thành công');
                         }else{
                             alert(res.message);

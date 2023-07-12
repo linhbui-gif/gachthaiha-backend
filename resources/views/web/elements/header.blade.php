@@ -27,10 +27,10 @@
                 <div class="nav_block"><a class="navbar-brand" href="/"><img class="logo_light" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"><img class="logo_dark" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"></a>
                     <div class="contact_phone order-md-last"><i class="linearicons-phone-wave"></i><span>{{ \App\Libs\WebLib::getSetting(\App\Models\Setting::HOT_LINE_NUMBER) }}</span></div>
                     <div class="product_search_form">
-                        <form>
+                        <form method="get" action="{{route('web.product.search')}}">
                             <div class="input-group">
-                                <input class="form-control" placeholder="Tìm kiếm sản phẩm..." required="" type="text">
-                                <button class="search_btn" type="submit"><i class="linearicons-magnifier"></i></button>
+                                <input class="form-control" placeholder="Tìm kiếm sản phẩm..." value="{{request()->get("keyword")}}"  type="text">
+                                <button class="search_btn" name="keyword" type="submit"><i class="linearicons-magnifier"></i></button>
                             </div>
                         </form>
                     </div>
@@ -87,69 +87,69 @@
                                         </div>
                                         @endif
                                     </li>
-                               
-                            <li class="dropdown"><a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#">Gạch trang trí</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Gạch sân vườn</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Ngói lợp</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Phụ kiện</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Sản phẩm khác</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Sàn gỗ</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>
-                                    </ul>
-                                </div>
-                            </li>
                                 @endforeach
                             @endif
+{{--                            <li class="dropdown"><a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#">Gạch trang trí</a>--}}
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Gạch sân vườn</a>--}}
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Ngói lợp</a>--}}
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Phụ kiện</a>--}}
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Sản phẩm khác</a>--}}
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Sàn gỗ</a>--}}
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+
                         </ul>
                     </div>
                     <ul class="navbar-nav attr-nav align-items-center">
@@ -163,7 +163,7 @@
                             <div class="search_overlay"></div>
                             <div class="search_overlay"></div>
                         </li>
-                        <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">{{\Gloudemans\Shoppingcart\Cart::count()}}</span></a>
+                        <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">1</span></a>
                             <div class="cart_box dropdown-menu dropdown-menu-right">
                                 <ul class="cart_list">
                                     <li><a class="item_remove" href="#"><i class="ion-close"></i></a><a href="#"><img src="assets/images/cart_thamb1.jpg" alt="cart_thumb1">Variable product 001</a><span class="cart_quantity">1 x<span class="cart_amount"><span class="price_symbole">$</span></span>78.00</span></li>
