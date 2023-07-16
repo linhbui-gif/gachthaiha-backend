@@ -34,7 +34,7 @@ class BrandController extends ResourceController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', new Utf8StringRule()],
+            'name' => ['required'],
             'link' => ['required'],
             'image' => ['required', 'url'],
             'status' => ['required', Rule::in([BaseModel::STATUS_ACTIVE, BaseModel::STATUS_INACTIVE])],
@@ -77,7 +77,7 @@ class BrandController extends ResourceController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => ['required', new Utf8StringRule()],
+            'name' => ['required'],
             'link' => ['required'],
             'image' => ['required', 'url'],
             'status' => ['required', Rule::in([BaseModel::STATUS_ACTIVE, BaseModel::STATUS_INACTIVE])]
@@ -86,11 +86,11 @@ class BrandController extends ResourceController
             'name' => $request->name,
             'link' => $request->link,
             'image' => $request->image,
-            'status' => $request->status
+            'status' => $request->status,
+            'type' => $request->type,
         ];
 
         BrandCategory::where('brand_id', $id)->delete();
-
         if(!empty($request->category_id)){
             $insertRelation = [];
             foreach($request->category_id as $key => $value){
