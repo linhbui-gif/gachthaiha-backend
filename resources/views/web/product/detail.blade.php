@@ -21,7 +21,7 @@
                         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
                             <div class="product-image">
                                 <div class="product_img_box">
-                                    <img id="product_img" src="{{ $galleryProduct && @$galleryProduct[0] }}" data-zoom-image="{{ $galleryProduct && @$galleryProduct[0] }}" alt="product_img1">
+                                    <img id="product_img" src="{{ @$galleryProduct[1] }}" data-zoom-image="{{ @$galleryProduct[1] }}" alt="product_img1">
                                     <a class="product_img_zoom" href="#" title="Zoom">
                                         <span class="linearicons-zoom-in">
                                         </span>

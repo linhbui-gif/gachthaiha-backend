@@ -30,7 +30,12 @@ class CartController extends Controller
     public function update($id, $quantity)
     {
         Cart::update($id, $quantity);
-        return redirect()->route('web.cart.index');
+        $html = view('web.cart.cart-item');
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật giỏ hàng thành công',
+            'html' => $html->render()
+        ]);
     }
 
 
