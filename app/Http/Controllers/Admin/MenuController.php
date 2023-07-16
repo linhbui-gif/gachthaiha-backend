@@ -39,13 +39,13 @@ class MenuController extends ResourceController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', new Utf8StringRule(), 'max:255'],
+            'name' => ['required', 'max:255'],
             'position' => ['required', Rule::in(array_keys(Menu::$listPosition))],
             'status' => ['required', Rule::in([BaseModel::STATUS_ACTIVE, BaseModel::STATUS_INACTIVE])],
             'item' => ['required', 'array'],
             'item.*' => ['required', 'array'],
-            'item.*.title' => ['required', new Utf8StringRule(), 'max:255'],
-            'item.*.link' => ['required', new Utf8StringRule(), 'max:255'],
+            'item.*.title' => ['required', 'max:255'],
+            'item.*.link' => ['required', 'max:255'],
             'item.*.position' => ['required', 'integer'],
         ]);
         $post = $request->post();

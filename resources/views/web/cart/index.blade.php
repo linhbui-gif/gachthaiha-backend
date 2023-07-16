@@ -26,7 +26,7 @@
                                 <th class="product-remove">Xoá</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="cart-item-render">
                             <?php $cart = Cart::content();
                             $totalAmount = 0;
                             ?>
@@ -45,7 +45,6 @@
                                                 type="button"
                                                 value="-"
                                                 class="minus"
-                                                onclick="var result = document.getElementById('qtyItem{{ $value->rowId }}'); var qtyItem{{ $value->rowId }} = result.value; if( !isNaN( qtyItem{{ $value->rowId }} ) &amp;&amp; qtyItem{{ $value->rowId }} > 1 ) result.value--;return false;"
                                         >
                                         <input
                                                 id="qtyItem{{ $value->rowId }}"
@@ -61,7 +60,6 @@
                                                 type="button"
                                                 value="+"
                                                 class="plus"
-                                                onclick="var result = document.getElementById('qtyItem{{ $value->rowId }}'); var qtyItem{{ $value->rowId }} = result.value; if( !isNaN( qtyItem{{ $value->rowId }} )) result.value++;return false;"
                                         >
                                     </div>
                                 </td>
@@ -76,17 +74,6 @@
                                 @endforeach
                             @endif
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="6" class="px-0">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-lg-8 col-md-6 text-left text-md-right">
-                                            <button class="btn btn-line-fill btn-sm" type="submit">Update Cart</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -127,11 +114,47 @@
 @section('script')
     <script type="text/javascript" language="JavaScript">
         $(document).ready(function () {
-            $('.input_qty').change(function () {
-                var quantity = $(this).val();
-                var id = $(this).attr('data-id');
-                var href = '/gio-hang/update/' + id + '/' + quantity;
-                window.location = href;
+            $('.cart-item-render').on('click', '.plus', function () {
+                let inputQty = $(this).siblings('.input_qty');
+                let inputValue = parseInt(inputQty.val()) + 1;
+                let id = inputQty.attr('data-id');
+                $('.spinner').show();
+                $.ajax({
+                    url: `/gio-hang/update/${id}/${inputValue}`,
+                    type: 'get',
+                    dataType: 'json',
+                    data: { quantity: inputValue },
+                    success: function (res) {
+                        if (res.success) {
+                            $('.spinner').hide();
+                            $(".cart-item-render").html(res.html);
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi trong quá trình thêm sản phẩm vào giỏ hàng. Mời bạn thử lại');
+                    }
+                });
+            });
+            $('.cart-item-render').on('click', '.minus', function () {
+                let inputQty = $(this).next('.input_qty');
+                let inputValue = parseInt(inputQty.val()) - 1;
+                let id = inputQty.attr('data-id');
+                $('.spinner').show();
+                $.ajax({
+                    url: `/gio-hang/update/${id}/${inputValue}`,
+                    type: 'get',
+                    dataType: 'json',
+                    data: { quantity: inputValue },
+                    success: function (res) {
+                        if (res.success) {
+                            $('.spinner').hide();
+                            $(".cart-item-render").html(res.html);
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi trong quá trình thêm sản phẩm vào giỏ hàng. Mời bạn thử lại');
+                    }
+                });
             });
         });
     </script>
