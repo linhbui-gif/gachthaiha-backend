@@ -50,7 +50,7 @@ class PageController extends ResourceController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => ['required', new Utf8StringRule()],
+            'name' => ['required'],
             'link' => ['required'],
             'image' => ['required', 'url'],
             'description' => ['nullable'],

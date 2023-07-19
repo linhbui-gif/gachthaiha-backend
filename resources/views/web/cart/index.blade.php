@@ -10,11 +10,16 @@
     @include('web.breadcrumb.breadcrumb',['breadcrumbList' => $breadCrumbList, 'title' => 'Giỏ hàng'])
 
     <div class="section">
+        <?php $cart = Cart::content();
+        $totalAmount = 0;
+        ?>
+        @if(!$cart->isEmpty())
         <div class="container">
             <form action="{{ route('web.cart.index') }}" method="post" novalidate="" class="margin-bottom-0">
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive shop_cart_table">
+
                         <table class="table">
                             <thead>
                             <tr>
@@ -27,10 +32,6 @@
                             </tr>
                             </thead>
                             <tbody class="cart-item-render">
-                            <?php $cart = Cart::content();
-                            $totalAmount = 0;
-                            ?>
-                            @if(!$cart->isEmpty())
                                 @foreach($cart as $key => $value)
                                 <?php $href = route('web.product.detail', ['link' => $value->model->link]); ?>
                                  <tr>
@@ -72,9 +73,10 @@
                                                                                   data-id="{{ $value->rowId }}"><i class="ti-close"></i></a></td>
                             </tr>
                                 @endforeach
-                            @endif
+
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -107,6 +109,13 @@
                 </div>
             </div>
         </div>
+        @else
+            <div class="text-center">
+                <img src="https://ebook-demo.netlify.app/static/media/image-empty.2b0b05a6.png" alt="not-have-product">
+                <p>Không có sản phẩm nào trong giỏ hàng </p>
+                <a href="/san-pham" class="btn btn-fill-out">Tiếp tục mua hàng</a>
+            </div>
+        @endif
     </div>
 @endsection
 

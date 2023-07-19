@@ -6936,10 +6936,11 @@ footer .widget_title {
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
+    display: flex;
 }
 
 .comment_img {
-    float: left;
+
 }
 
 .comment_img img {
@@ -6948,7 +6949,8 @@ footer .widget_title {
 }
 
 .comment_block {
-    padding-left: 120px;
+    padding-left: 30px;
+    flex: 1;
 }
 
 .customer_meta {
