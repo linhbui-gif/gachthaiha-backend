@@ -17,7 +17,6 @@ class PageController extends Controller
 
         $relatePage = Page::where('status', BaseModel::STATUS_ACTIVE)
             ->limit(10)->orderBy('id', 'desc')->get();
-
         return view('web.page.detail', [
             'page' => $page,
             'relatePage' => $relatePage

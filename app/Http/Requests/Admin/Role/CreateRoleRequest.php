@@ -28,7 +28,7 @@ class CreateRoleRequest extends FormRequest
     {
         $listPermission = Permission::pluck('name')->toArray();
         return [
-            'name' => ['required', new Utf8StringRule(), 'max: 255'],
+            'name' => ['required', 'max: 255'],
             'permission' => ['required', 'array'],
             'permission.*' => ['required', Rule::in($listPermission)]
         ];

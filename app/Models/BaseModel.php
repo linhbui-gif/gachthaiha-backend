@@ -80,8 +80,8 @@ class BaseModel extends Model
      */
     public function scopeSortOrder($query, Request $request)
     {
-        if($request->input('order') && $request->input('order_by')){
-            return $query->orderBy($request->input('order_by'), $request->input('order'));
+        if($request->input('orders') && $request->input('order_by')){
+            return $query->orderBy($request->input('order_by'), $request->input('orders'));
         }
 
         return $query;

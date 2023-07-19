@@ -9,5 +9,8 @@ class OrderController extends ResourceController
     protected $model = Order::class;
     protected $viewPath = 'order';
     protected $name = 'Đơn hàng';
-    protected $route = 'order';
+    protected $route = 'orders';
+    public function index(){
+        return parent::index();
+    }
 }

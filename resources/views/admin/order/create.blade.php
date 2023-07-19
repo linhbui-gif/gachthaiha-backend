@@ -58,7 +58,12 @@
                             {!! Form::textarea('note', old('note'), ['class' => 'form-control', 'placeholder' => 'Ghi chú', 'rows' => 5, 'style' => 'resize: vertical;']) !!}
                             <span class="help-block text-red validation_error hide validation_note"></span>
                         </div>
-
+                        <div class="form-group">
+                            {!! Form::label('payment_method', 'Phương thức thanh toán', ['class' => 'control-label']) !!}
+                            <span class="text-red" style="font-weight: 600">*</span>
+                            <p>{{ $record->payment_method == 1 ? "Tiền mặt" : "Chuyển khoản"  }}</p>
+                            <span class="help-block text-red validation_error hide validation_address"></span>
+                        </div>
                     </div>
                     <div class="col-sm-8">
                         @if(!empty($record))
@@ -120,7 +125,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <hr/>
-                            <button class="btn btn-primary"><i class="fa fa-check"></i> {{ $pageTitle }}</button>
+                            <a class="btn btn-primary" href="/admin/order"><i class="fa fa-check"></i> Quay lại danh sách đơn hàng</a>
                         </div>
                     </div>
                     <div class="clearfix"></div>

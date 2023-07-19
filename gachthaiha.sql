@@ -12661,7 +12661,7 @@ CREATE TABLE `notifications` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Table structure for table `order`
 --
 
 CREATE TABLE `orders` (
@@ -12678,7 +12678,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `orders`
+-- Dumping data for table `order`
 --
 
 INSERT INTO `orders` (`id`, `name`, `phone`, `address`, `note`, `total_amount`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -13422,7 +13422,7 @@ ALTER TABLE `notifications`
   ADD KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`);
 
 --
--- Indexes for table `orders`
+-- Indexes for table `order`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
@@ -13644,7 +13644,7 @@ ALTER TABLE `news_categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;

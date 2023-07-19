@@ -43,6 +43,11 @@
                     <i class="fa fa-dashboard"></i> <span>{{ trans('admin.dashboard') }}</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.order.index') }}">
+                    <i class="fa fa-product-hunt"></i> <span>Quản lý đơn hàng</span>
+                </a>
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-product-hunt"></i>
@@ -60,11 +65,11 @@
                         </li>
                     @endif
 
-                        <li>
-                            <a href="{{ route('admin.product.excel_update') }}">
-                                <i class="fa fa-upload"></i> Update Excel
-                            </a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a href="{{ route('admin.product.excel_update') }}">--}}
+{{--                                <i class="fa fa-upload"></i> Update Excel--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
                     @if($admin->can(config('permission.list.product_category.list')))
                         <li>
@@ -98,17 +103,17 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="{{ route('admin.product_comment.index') }}">
-                            <i class="fa fa-comments"></i> Bình luận sản phẩm
-                        </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="{{ route('admin.product_comment.index') }}">--}}
+{{--                            <i class="fa fa-comments"></i> Bình luận sản phẩm--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li>
-                        <a href="{{ route('admin.product_review.index') }}">
-                            <i class="fa fa-star"></i> Đánh giá sản phẩm
-                        </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="{{ route('admin.product_review.index') }}">--}}
+{{--                            <i class="fa fa-star"></i> Đánh giá sản phẩm--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
             </li>
 
@@ -154,13 +159,13 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    @if($admin->can(config('permission.list.customer_review.list')))
-                        <li>
-                            <a href="{{ route('admin.customer_review.index') }}">
-                                <i class="fa fa-commenting-o"></i> Khách hàng review
-                            </a>
-                        </li>
-                    @endif
+{{--                    @if($admin->can(config('permission.list.customer_review.list')))--}}
+{{--                        <li>--}}
+{{--                            <a href="{{ route('admin.customer_review.index') }}">--}}
+{{--                                <i class="fa fa-commenting-o"></i> Khách hàng review--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
                     @if($admin->can(config('permission.list.contact.list')))
                         <li>
                             <a href="{{ route('admin.contact.index') }}">
@@ -168,13 +173,13 @@
                             </a>
                         </li>
                     @endif
-                    @if($admin->can(config('permission.list.subscription.list')))
-                        <li>
-                            <a href="{{ route('admin.subscription.index') }}">
-                                <i class="fa fa-envelope"></i> Email đăng ký nhận tin
-                            </a>
-                        </li>
-                    @endif
+{{--                    @if($admin->can(config('permission.list.subscription.list')))--}}
+{{--                        <li>--}}
+{{--                            <a href="{{ route('admin.subscription.index') }}">--}}
+{{--                                <i class="fa fa-envelope"></i> Email đăng ký nhận tin--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
                 </ul>
             </li>
 

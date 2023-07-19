@@ -30,6 +30,6 @@ class OrderEmail extends Mailable
     public function build()
     {
         return $this->from('no-reply@hdrush.vn', 'HDRush.vn')
-            ->markdown('emails.orders.admin', ['data' => $this->data]);
+            ->markdown('emails.order.admin', ['data' => $this->data]);
     }
 }

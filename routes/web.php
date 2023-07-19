@@ -71,7 +71,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::post('/make-read', 'NotifyController@makeRead')->name('admin.notify.make_read');
             Route::post('/make-all-read', 'NotifyController@makeAllRead')->name('admin.notify.make_all_read');
         });
-
+        RouteLib::generateRoute('order', 'OrderController', 'order');
         Route::prefix('profile')->group(function () {
             Route::get('/', 'ProfileController@index')->name('admin.profile.index');
             Route::post('/update', 'ProfileController@index')->name('admin.profile.update');
