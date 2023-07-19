@@ -40,8 +40,8 @@ Route::post('/thanh-toan', 'Web\CartController@postCheckout')->name('web.cart.po
 Route::get('/thanh-toan-thanh-cong', 'Web\CartController@checkoutSuccess')->name('web.cart.checkout_success');
 
 Route::get('/tin-tuc', 'Web\NewsController@index')->name('web.news.index');
-Route::get('/danh-muc-tin/{link}', 'Web\NewsController@category')->name('web.news.category');
-Route::get('/tin-tuc/{link}.html', 'Web\NewsController@detail')->name('web.news.detail');
+Route::get('/danh-muc-tin-tuc/{link}', 'Web\NewsController@category')->name('web.news.category');
+Route::get('/tin-tuc/{link}', 'Web\NewsController@detail')->name('web.news.detail');
 
 Route::get('/page/{link}', 'Web\PageController@detail')->name('web.page.detail');
 
