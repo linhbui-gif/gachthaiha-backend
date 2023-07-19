@@ -48,6 +48,11 @@
                     <i class="fa fa-product-hunt"></i> <span>Quản lý đơn hàng</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.menu.index') }}">
+                    <i class="fa fa-product-hunt"></i> <span>Quản lý menu</span>
+                </a>
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-product-hunt"></i>
@@ -103,17 +108,17 @@
                         </a>
                     </li>
 
-{{--                    <li>--}}
-{{--                        <a href="{{ route('admin.product_comment.index') }}">--}}
-{{--                            <i class="fa fa-comments"></i> Bình luận sản phẩm--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    <li>
+                        <a href="{{ route('admin.product_comment.index') }}">
+                            <i class="fa fa-comments"></i> Bình luận sản phẩm
+                        </a>
+                    </li>
 
-{{--                    <li>--}}
-{{--                        <a href="{{ route('admin.product_review.index') }}">--}}
-{{--                            <i class="fa fa-star"></i> Đánh giá sản phẩm--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    <li>
+                        <a href="{{ route('admin.product_review.index') }}">
+                            <i class="fa fa-star"></i> Đánh giá sản phẩm
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -159,13 +164,13 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-{{--                    @if($admin->can(config('permission.list.customer_review.list')))--}}
-{{--                        <li>--}}
-{{--                            <a href="{{ route('admin.customer_review.index') }}">--}}
-{{--                                <i class="fa fa-commenting-o"></i> Khách hàng review--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    @endif--}}
+                    @if($admin->can(config('permission.list.customer_review.list')))
+                        <li>
+                            <a href="{{ route('admin.customer_review.index') }}">
+                                <i class="fa fa-commenting-o"></i> Khách hàng review
+                            </a>
+                        </li>
+                    @endif
                     @if($admin->can(config('permission.list.contact.list')))
                         <li>
                             <a href="{{ route('admin.contact.index') }}">
