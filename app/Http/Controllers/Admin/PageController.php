@@ -27,7 +27,7 @@ class PageController extends ResourceController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', new Utf8StringRule()],
+            'name' => ['required'],
             'link' => ['required'],
             'image' => ['required', 'url'],
             'description' => ['nullable'],

@@ -128,10 +128,26 @@
                         if (res.success) {
                             $('.spinner').hide();
                             $(".cart-item-render").html(res.html);
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Cập nhật giỏ hàng thành công',
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
                         }
                     },
                     error: function () {
-                        alert('Có lỗi trong quá trình thêm sản phẩm vào giỏ hàng. Mời bạn thử lại');
+                        $('.spinner').hide();
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Có lỗi trong quá trình cập nhật sản phẩm vào giỏ hàng. Mời bạn thử lại!',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
                     }
                 });
             });
@@ -149,10 +165,25 @@
                         if (res.success) {
                             $('.spinner').hide();
                             $(".cart-item-render").html(res.html);
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Cập nhật giỏ hàng thành công',
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
                         }
                     },
                     error: function () {
-                        alert('Có lỗi trong quá trình thêm sản phẩm vào giỏ hàng. Mời bạn thử lại');
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Có lỗi trong quá trình cập nhật sản phẩm vào giỏ hàng. Mời bạn thử lại!',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
                     }
                 });
             });

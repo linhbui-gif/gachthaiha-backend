@@ -185,7 +185,7 @@ return [
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
     ],
 
     /*
@@ -243,7 +243,7 @@ return [
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
     ],
 
 ];

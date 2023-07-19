@@ -91,6 +91,7 @@ class CartController extends Controller
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'note' => $request->note,
+                'payment_method' => $request->payment_method,
                 'total_amount' => str_replace([','], '', Cart::total())
             ];
             $orderId = Order::insertGetId($insertOrder);
@@ -111,10 +112,10 @@ class CartController extends Controller
             }
 
             // send email
-            $adminEmail = WebLib::getSetting(Setting::ADMIN_EMAIL);
-            if (!empty($adminEmail)) {
-                Mail::to($adminEmail)->send(new OrderEmail($insertOrder));
-            }
+//            $adminEmail = WebLib::getSetting(Setting::ADMIN_EMAIL);
+//            if (!empty($adminEmail)) {
+//                Mail::to($adminEmail)->send(new OrderEmail($insertOrder));
+//            }
 
             Cart::destroy();
 

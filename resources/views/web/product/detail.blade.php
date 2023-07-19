@@ -198,13 +198,34 @@
                     success: function(res){
                         if(res.success){
                             $('.cart_count').text(res.number_product);
-                            alert('Thêm sản phẩm vào giỏ hàng thành công');
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Thêm sản phẩm vào giỏ hàng thành công',
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
                         }else{
-                            alert(res.message);
+                            Swal.fire({
+                                icon: 'error',
+                                text: res.message,
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
                         }
                     },
                     error: function(){
-                        alert('Có lỗi trong quá trình thêm sản phẩm vào giỏ hàng. Mời bạn thử lại');
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Có lỗi trong quá trình thêm sản phẩm vào giỏ hàng. Mời bạn thử lại',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
                     }
                 });
             });

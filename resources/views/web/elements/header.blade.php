@@ -165,8 +165,9 @@
                         </li>
                         <li class="dropdown cart_dropdown">
                             <a class="nav-link " href="/gio-hang">
+                                <?php $cart = Cart::count(); ?>
                                 <i class="linearicons-cart"></i>
-                                <span class="cart_count">1</span></a>
+                                <span class="cart_count">{{$cart ?? 0}}</span></a>
 {{--                            <div class="cart_box dropdown-menu dropdown-menu-right">--}}
 {{--                                <ul class="cart_list">--}}
 {{--                                    <li><a class="item_remove" href="#"><i class="ion-close"></i></a><a href="#"><img src="assets/images/cart_thamb1.jpg" alt="cart_thumb1">Variable product 001</a><span class="cart_quantity">1 x<span class="cart_amount"><span class="price_symbole">$</span></span>78.00</span></li>--}}

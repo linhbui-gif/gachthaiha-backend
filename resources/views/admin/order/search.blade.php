@@ -10,22 +10,22 @@
             <th>
                 <input name="check_all" class="form_check_all" data-class="check" type="checkbox">
             </th>
-            <th class="order_by {{ $request->order_by == 'orders.id' ? 'active' : '' }}"
+            <th class="order_by {{ $request->order_by == 'order.id' ? 'active' : '' }}"
                 data-order-by="orders.id" data-order="{{ $request->order }}"
                 data-form=".frm_form_search">{{ trans('admin.id') }}
-                {!! $request->order_by == 'orders.id' ? ($request->order == 'ASC' ? '<i class="fa fa-caret-up"></i>' : '<i class="fa fa-caret-down"></i>') : '<i class="fa fa-sort"></i>' !!}
+                {!! $request->order_by == 'order.id' ? ($request->order == 'ASC' ? '<i class="fa fa-caret-up"></i>' : '<i class="fa fa-caret-down"></i>') : '<i class="fa fa-sort"></i>' !!}
             </th>
-            <th class="order_by {{ $request->order_by == 'orders.name' ? 'active' : '' }}"
+            <th class="order_by {{ $request->order_by == 'order.name' ? 'active' : '' }}"
                 data-order-by="orders.name" data-order="{{ $request->order }}"
                 data-form=".frm_form_search"> Tên khách hàng
-                {!! $request->order_by == 'orders.name' ? ($request->order == 'ASC' ? '<i class="fa fa-caret-up"></i>' : '<i class="fa fa-caret-down"></i>') : '<i class="fa fa-sort"></i>' !!}
+                {!! $request->order_by == 'order.name' ? ($request->order == 'ASC' ? '<i class="fa fa-caret-up"></i>' : '<i class="fa fa-caret-down"></i>') : '<i class="fa fa-sort"></i>' !!}
             </th>
             <th>Số điện thoại</th>
             <th>Tổng tiền</th>
-            <th class="order_by {{ $request->order_by == 'orders.status' ? 'active' : '' }}"
+            <th class="order_by {{ $request->order_by == 'order.status' ? 'active' : '' }}"
                 data-order-by="orders.status" data-order="{{ $request->order }}"
                 data-form=".frm_form_search">{{ trans('admin.status') }}
-                {!! $request->order_by == 'orders.status' ? ($request->order == 'ASC' ? '<i class="fa fa-caret-up"></i>' : '<i class="fa fa-caret-down"></i>') : '<i class="fa fa-sort"></i>' !!}
+                {!! $request->order_by == 'order.status' ? ($request->order == 'ASC' ? '<i class="fa fa-caret-up"></i>' : '<i class="fa fa-caret-down"></i>') : '<i class="fa fa-sort"></i>' !!}
             </th>
             <th>Hành động</th>
         </tr>

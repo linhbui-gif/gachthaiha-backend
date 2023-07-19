@@ -134,6 +134,23 @@
     @yield('content')
     </main>
     @include('web.elements.footer')
+    @include('sweetalert::alert')
+    @if (session('success'))
+        <script>
+            swal({
+                title: "{{ session('success') }}",
+                icon: "success",
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            swal({
+                title: "{{ session('error') }}",
+                icon: "error",
+            });
+        </script>
+    @endif
     <a class="scrollup" href="#" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
     <!-- JS here-->
     <!-- Latest jQuery-->
@@ -162,6 +179,7 @@
     <script src="{{ asset('assets/frontend/js/slick.min.js') }}"></script>
     <!-- elevatezoom js-->
     <script src="{{ asset('assets/frontend/js/jquery.elevatezoom.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <!-- scripts js-->
     <script src="{{ asset('assets/frontend/js/scripts.js') }}"></script>
 @yield('script')

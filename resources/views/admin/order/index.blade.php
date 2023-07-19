@@ -24,7 +24,7 @@
                 {!! Form::hidden('page', 1, ['id' => 'page']) !!}
                 {!! Form::hidden('limit', 10, ['id' => 'limit', 'class' => 'input_limit']) !!}
                 {!! Form::hidden('order', 'DESC', ['id' => 'order', 'class' => 'input_order']) !!}
-                {!! Form::hidden('order_by', 'orders.id', ['id' => 'order_by', 'class' => 'input_order_by']) !!}
+                {!! Form::hidden('order_by', 'order.id', ['id' => 'order_by', 'class' => 'input_order_by']) !!}
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
