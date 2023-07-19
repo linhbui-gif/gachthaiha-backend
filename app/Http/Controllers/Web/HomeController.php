@@ -7,6 +7,7 @@ use App\Libs\SeoLib;
 use App\Models\BaseModel;
 use App\Models\Collection;
 use App\Models\Contact;
+use App\Models\Menu;
 use App\Models\News;
 use App\Models\Page;
 use App\Http\Controllers\Controller;

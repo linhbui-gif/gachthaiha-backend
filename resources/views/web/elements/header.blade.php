@@ -1,4 +1,8 @@
 <!-- START HEADER-->
+<?php
+$menuDetail = $menuTop->detail;
+//dd($menuDetail);
+?>
 <header class="header_wrap">
     <div class="top-header">
         <div class="container">
@@ -12,10 +16,11 @@
                 </div>
                 <div class="col-lg-6 col-md-4">
                     <div class="d-flex align-items-center justify-content-center justify-content-md-end">
-                        <div class="header_offer"><span>Giới thiệu</span></div>
-                        <div class="header_offer"><span>Tin tức</span></div>
-                        <div class="header_offer"><span>Tài khoản ngân hàng</span></div>
-                        <div class="header_offer"><span>Liên hệ</span></div>
+                        @if(!empty($menuDetail))
+                            @foreach($menuDetail as $key => $value)
+                              <div class="header_offer"><a style="color:white" href="{{$value->link}}">{{$value->title}}</a></div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

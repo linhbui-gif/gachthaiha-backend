@@ -235,15 +235,15 @@ class ProductController extends Controller
     public function review(Request $request)
     {
         $this->validate($request, [
-            'product_id' => ['required', 'exists:products,id'],
-            'point' => ['required', 'integer', 'min:1', 'max:5'],
+            'product_review_id' => ['required', 'exists:products,id'],
+            'rating' => ['required', 'integer', 'min:1', 'max:5'],
             'name' => ['required', 'max:255'],
             'comment' => ['required', 'max:500']
         ]);
 
         $review = ProductReview::create([
-            'product_id' => $request->product_id,
-            'point' => $request->point,
+            'product_id' => $request->product_review_id,
+            'point' => $request->rating,
             'name' => $request->name,
             'comment' => $request->comment,
             'status' => BaseModel::STATUS_INACTIVE

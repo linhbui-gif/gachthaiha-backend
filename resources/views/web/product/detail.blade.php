@@ -94,6 +94,30 @@
                         </div>
                     </div>
                 </div>
+                <style>
+                    .rating-review {
+                        direction: rtl; /* Đảo ngược thứ tự sao */
+                        unicode-bidi: bidi-override;
+                        text-align: center;
+                        font-size: 36px;
+                    }
+
+                    .rating-review input {
+                        display: none; /* Ẩn input radio */
+                    }
+
+                    .rating-review label {
+                        display: inline-block;
+                        cursor: pointer;
+                        color: #ddd; /* Màu sao không được chọn */
+                    }
+
+                    .rating-review label:hover,
+                    .rating-review label:hover ~ label,
+                    .rating-review input:checked ~ label {
+                        color: #ffcc00; /* Màu sao khi hover hoặc đã chọn */
+                    }
+                </style>
                 <div>
                     <div class="row">
                         <div class="col-12">
@@ -101,6 +125,7 @@
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item"><a class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">Mô tả</a></li>
                                     <li class="nav-item"><a class="nav-link" id="Additional-info-tab" data-toggle="tab" href="#Additional-info" role="tab" aria-controls="Additional-info" aria-selected="false">Thông tin bổ sung</a></li>
+                                    <li class="nav-item"><a class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Review" role="tab" aria-controls="Reviews" aria-selected="false">Đánh giá</a></li>
                                 </ul>
                                 <div class="tab-content shop_info_tab">
                                     <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
@@ -125,6 +150,39 @@
                                                 <td>Artificial Leather</td>
                                             </tr>
                                         </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="Review" role="tabpanel" aria-labelledby="Reviews-tab">
+                                        @include('web.product.element.product_review')
+                                        <div class="review_form field_form">
+                                            <h5>Để lại đánh giá</h5>
+                                            <form class="row mt-3 form_review" method="post" name="form_review" action="{{route('web.product.review')}}">
+                                                {{ csrf_field() }}
+                                                <div class="form-group col-12">
+                                                    <div class="rating-review">
+                                                        <input type="radio" id="star5" name="rating" value="5" />
+                                                        <label for="star5" title="5 stars">&#9733;</label>
+                                                        <input type="radio" id="star4" name="rating" value="4" />
+                                                        <label for="star4" title="4 stars">&#9733;</label>
+                                                        <input type="radio" id="star3" name="rating" value="3" />
+                                                        <label for="star3" title="3 stars">&#9733;</label>
+                                                        <input type="radio" id="star2" name="rating" value="2" />
+                                                        <label for="star2" title="2 stars">&#9733;</label>
+                                                        <input type="radio" id="star1" name="rating" value="1" />
+                                                        <label for="star1" title="1 star">&#9733;</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <textarea  placeholder="Nội dung đánh giá *" class="form-control" name="comment" rows="4"></textarea>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <input  placeholder="Nhập tên của bạn *" class="form-control" name="name" type="text">
+                                                </div>
+                                                <input type="hidden" name="product_review_id" value="{{$product->id}}">
+                                                <div class="form-group col-12">
+                                                    <button  class="btn btn-fill-out">Để lại đánh giá</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -188,8 +246,10 @@
 @section('script')
     <script type="text/javascript" language="JavaScript">
         $(document).ready(function () {
+            let selectedRating = '';
             $('#add-to-cart-form').submit(function(e){
                 e.preventDefault();
+                $('.spinner').show();
                 $.ajax({
                     url: $(this).attr('action'),
                     type: 'post',
@@ -198,14 +258,13 @@
                     success: function(res){
                         if(res.success){
                             $('.cart_count').text(res.number_product);
-                            Swal.fire({
-                                icon: 'success',
-                                text: 'Thêm sản phẩm vào giỏ hàng thành công',
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
+                            $('.spinner').hide();
+                            swal({
+                                title: "Thành công",
+                                text: res?.message,
+                                icon: "success",
+                                button: "OK",
+                            })
                         }else{
                             Swal.fire({
                                 icon: 'error',
@@ -229,6 +288,46 @@
                     }
                 });
             });
+            $(".form_review").submit(function (e){
+                e.preventDefault();
+                $('.spinner').show();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'post',
+                    dataType: 'json',
+                    data: $(this).serialize(),
+                    success: function(res){
+                        if(res.success){
+                            $('.spinner').hide();
+                            swal({
+                                title: "Đánh giá thành công",
+                                text: res?.message,
+                                icon: "success",
+                                button: "OK",
+                            }).then(() => {
+                                window.location = '{{ route('web.product.detail',['link' => $product->link]) }}';
+                            })
+                        }else{
+                            $('.spinner').hide();
+                            swal({
+                                title: "Đánh giá thất bại",
+                                text: res?.message,
+                                icon: "warning",
+                                button: "OK",
+                            })
+                        }
+                    },
+                    error: function(error){
+                        $('.spinner').hide();
+                        swal({
+                            title: "Đánh giá thất bại",
+                            text: res?.message,
+                            icon: "warning",
+                            button: "OK",
+                        })
+                    }
+                });
+            })
         });
     </script>
 @endsection
