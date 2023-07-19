@@ -61,7 +61,7 @@
                         <div class="form-group">
                             {!! Form::label('payment_method', 'Phương thức thanh toán', ['class' => 'control-label']) !!}
                             <span class="text-red" style="font-weight: 600">*</span>
-                            <p>{{ $record->payment_method == 1 ? "Tiền mặt" : "Chuyển khoản"  }}</p>
+                            {!! Form::text('payment_method', $record->payment_method == 1 ? "Tiền mặt" : "Chuyển khoản", ['class' => 'form-control', 'placeholder' => 'Phương thức thanh toán']) !!}
                             <span class="help-block text-red validation_error hide validation_address"></span>
                         </div>
                     </div>
