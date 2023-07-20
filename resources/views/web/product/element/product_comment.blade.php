@@ -1,81 +1,80 @@
-<div class="devvn_prod_cmt">
-    <strong>Hỏi đáp</strong>
-    <div class="devvn_cmt_form">
-        <form action="{{ route('web.product.comment') }}" method="post">
-            <div class="devvn_cmt_input">
-                <textarea placeholder="Mời bạn tham gia thảo luận, vui lòng nhập tiếng Việt có dấu." name="comment" id="devvn_cmt_content"></textarea>
-            </div>
-            <div class="devvn_cmt_form_bottom ">
-                <div class="devvn_cmt_radio">
-                    <label>
-                        <input name="devvn_cmt_gender" type="radio" value="male" checked="checked">
-                        <span>Anh</span>
-                    </label>
-                    <label>
-                        <input name="devvn_cmt_gender" type="radio" value="female">
-                        <span>Chị</span>
-                    </label>
-                </div>
-                <div class="devvn_cmt_input">
-                    <input name="devvn_cmt_name" type="text" id="devvn_cmt_name" placeholder="Họ tên (bắt buộc)">
-                </div>
-                <div class="devvn_cmt_submit">
-                    <button type="submit" id="devvn_cmt_submit">Gửi</button>
-                    <input type="hidden" value="{{ $product->id }}" name="product_id">
-                </div>
-            </div>
-        </form>
+<div class="comment-area">
+    <div class="content_title">
+        <h5>(03) Comments</h5>
     </div>
-
-
-    <div class="devvn_cmt_list">
-        <div class="devvn_cmt_list_header">
-            <div class="devvn_cmt_lheader_left">
-                <span class="devvn_cmt_count">{{ $product->comment->count()  }} bình luận</span>
-            </div>
-            <div class="devvn_cmt_lheader_right"></div>
-        </div>
-        <div class="devvn_cmt_list_box">
-            <ul itemscope="" itemtype="https://schema.org/FAQPage">
-                @php
-                    $comment = $product->comment()->whereNull('parent_id')->orWhere('parent_id', 0)->with(['child'])->paginate(15);
-                @endphp
-                @if(!empty($comment) && !$comment->isEmpty())
-                    @foreach($comment as $key => $value)
-                        <li itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
-                            <div class="devvn_cmt_box">
-                                <span>KH</span>
-                                <strong>{{ $value->name }}</strong>
-                                <div class="devvn_cmt_box_content" itemprop="name">
-                                    <p>{{ $value->comment }}</p>
+    <ul class="list_none comment_list">
+        @php
+            $comment = $product->comment()->whereNull('parent_id')->orWhere('parent_id', 0)->with(['child'])->paginate(15)
+        @endphp
+        @if(!empty($comment) && !$comment->isEmpty())
+            @foreach($comment as $key => $value)
+                <li class="comment_info">
+                    <div class="d-flex">
+                        <div class="comment_user">
+                            <img src="assets/images/user2.jpg" alt="user2">
+                        </div>
+                        <div class="comment_content">
+                            <div class="d-flex">
+                                <div class="meta_data">
+                                    <h6><a href="#">{{ $value->name }}</a></h6>
+                                    <div class="comment-time">MARCH 5, 2018, 6:05 PM</div>
                                 </div>
-                                <div class="devvn_cmt_tool">
-                                    <span>
-                                        <a href="#" rel="nofollow" class="devvn_cmt_reply">Trả lời</a>
-                                    </span>
+                                <div class="ml-auto">
+                                    <a href="#" class="comment-reply"><i class="ion-reply-all"></i>Reply</a>
                                 </div>
                             </div>
-
-                            @if(!$value->child->isEmpty())
-                                <ul class="devvn_cmt_child">
-                                    @foreach($value->child as $child)
-                                        <li itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
-                                            <div class="devvn_cmt_box">
-                                                <span>TH</span>
-                                                <strong>Gạch Thái Hà</strong>
-                                                <b class="qtv">Quản trị viên</b>
-                                                <div class="devvn_cmt_box_content" itemprop="text">
-                                                    <p>{{ $child->comment }}</p>
+                            <p>{{ $value->comment }}</p>
+                        </div>
+                    </div>
+                    @if(!$value->child->isEmpty())
+                        <ul class="children">
+                            @foreach($value->child as $child)
+                                <li class="comment_info">
+                                    <div class="d-flex">
+                                        <div class="comment_user">
+                                            <img src="assets/images/user3.jpg" alt="user3">
+                                        </div>
+                                        <div class="comment_content">
+                                            <div class="d-flex align-items-md-center">
+                                                <div class="meta_data">
+                                                    <h6><a href="#">Quản trị viên<</a></h6>
+                                                    <div class="comment-time">april 8, 2018, 5:15 PM</div>
+                                                </div>
+                                                <div class="ml-auto">
+                                                    <a href="#" class="comment-reply"><i class="ion-reply-all"></i>Reply</a>
                                                 </div>
                                             </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                    @endforeach
-                @endif
-            </ul>
-        </div>
+                                            <p>{{ $child->comment }}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </li>
+            @endforeach
+        @endif
+    </ul>
+    <div class="content_title">
+        <h5>Để lại bình luận của bạn</h5>
     </div>
+    <form class="field_form" action="{{ route('web.product.comment') }}" method="post">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <input name="name" class="form-control" placeholder="Họ và Tên..." required="required" type="text">
+            </div>
+            <div class="form-group col-md-4">
+                <input name="email" class="form-control" placeholder="Email..." required="required" type="email">
+            </div>
+            <div class="form-group col-md-12">
+                <textarea rows="3" name="comment" class="form-control"
+                          placeholder="Mời bạn tham gia thảo luận, vui lòng nhập tiếng Việt có dấu"
+                          required="required"></textarea>
+            </div>
+            <div class="form-group col-md-12">
+                <button class="btn btn-fill-out" title="Bình luận!">Để lại bình luận</button>
+                <input type="hidden" value="{{ $product->id }}" name="product_id">
+            </div>
+        </div>
+    </form>
 </div>
