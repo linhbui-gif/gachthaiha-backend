@@ -13,6 +13,7 @@
      $galleryProduct = json_decode($product->feature_image, true);
     ?>
     @include('web.breadcrumb.breadcrumb',['breadcrumbList' => $breadCrumbList, 'title' => $product->name])
+    @include('web.elements.modal_contact')
     <div class="section">
         <div class="container">
             <div class="row">
@@ -80,7 +81,7 @@
                                         <button class="btn btn-fill-out btn-addtocart btn-cart2" type="submit"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</button>
                                     </div>
                                     <div class="cart_btn mt-2">
-                                        <button class="btn btn-facebook" type="button" style="color:white"> Báo giá công trình</button>
+                                        <button class="btn btn-facebook" type="button" style="color:white" data-toggle="modal" data-target="#modalContact"> Báo giá công trình</button>
                                     </div>
                                 </div>
                                 </form>
