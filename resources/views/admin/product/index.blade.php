@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                {!! Form::open(['method' => 'POST', 'class' => 'frm_form_search_product']) !!}
+                {!! Form::open(['method' => 'POST', 'class' => 'frm_form_search']) !!}
                 {!! Form::hidden('page', 1, ['id' => 'page']) !!}
                 {!! Form::hidden('limit', 10, ['id' => 'limit', 'class' => 'input_limit']) !!}
                 {!! Form::hidden('order', 'DESC', ['id' => 'order', 'class' => 'input_order']) !!}
@@ -123,48 +123,48 @@
 @section('script')
     <script type="text/javascript" language="JavaScript">
         $(document).ready(function () {
-            $('.frm_form_search_product').submit(function (e) {
-                e.preventDefault();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'post',
-                    dataType: 'json',
-                    data: $(this).serialize(),
-                    beforeSend: function () {
-                        showPreload();
-                    },
-                    complete: function () {
-                        hidePreload();
-                    },
-                    success: function (res) {
-                        if (res.success) {
-                            if(typeof res.html != "undefined"){
-                                $('.show_ajax_data').html(res.html);
-                            }
-
-                            if (typeof res.url != "undefined") {
-                                window.location = res.url;
-                            }
-                        } else {
-                            showNotify('error', res.message);
-                        }
-                        $(document).trigger('icheck');
-                        $('[data-toggle=tooltip]').tooltip();
-                        $('.select2').select2();
-                    },
-                    error: function (error) {
-                        showAjaxError(error);
-                    }
-                });
-            });
+            // $('.frm_form_search_product').submit(function (e) {
+            //     e.preventDefault();
+            //     $.ajax({
+            //         url: $(this).attr('action'),
+            //         type: 'post',
+            //         dataType: 'json',
+            //         data: $(this).serialize(),
+            //         beforeSend: function () {
+            //             showPreload();
+            //         },
+            //         complete: function () {
+            //             hidePreload();
+            //         },
+            //         success: function (res) {
+            //             if (res.success) {
+            //                 if(typeof res.html != "undefined"){
+            //                     $('.show_ajax_data').html(res.html);
+            //                 }
+            //
+            //                 if (typeof res.url != "undefined") {
+            //                     window.location = res.url;
+            //                 }
+            //             } else {
+            //                 showNotify('error', res.message);
+            //             }
+            //             $(document).trigger('icheck');
+            //             $('[data-toggle=tooltip]').tooltip();
+            //             $('.select2').select2();
+            //         },
+            //         error: function (error) {
+            //             showAjaxError(error);
+            //         }
+            //     });
+            // });
 
             $('.btn_submit').click(function (e) {
                 e.preventDefault();
                 $('#submit_type').val($(this).attr('data-type'));
-                $('.frm_form_search_product').submit();
+                $('.frm_form_search').submit();
             });
 
-            $('.frm_form_search_product').submit();
+            $('.frm_form_search').submit();
 
             $(document).on('click', '.btn_update', function(){
                 var ID = $(this).attr('data-id');

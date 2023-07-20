@@ -17,56 +17,12 @@
                          <input type="text" name="phone" placeholder="Điện thoại..." class="form-control">
                      </div>
                     <div class="form-group">
-                        <textarea name="content" class="form-control" id="" cols="30" rows="10"></textarea>
+                        <textarea name="content" class="form-control" placeholder="Nội dung..." id="" cols="10" rows="3"></textarea>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button size="xs" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button class="btn btn-primary">Gửi</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-@section('script')
-    <script type="text/javascript" language="JavaScript">
-        $(document).ready(function () {
-            $("#modalContact").submit(function (e){
-                e.preventDefault();
-                $('.spinner').show();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'post',
-                    dataType: 'json',
-                    data: $(this).serialize(),
-                    success: function(res){
-                        if(res.success){
-                            $('.spinner').hide();
-                            swal({
-                                title: "Thành công!",
-                                text: res?.message,
-                                icon: "success",
-                                button: "OK",
-                            })
-                        }else{
-                            $('.spinner').hide();
-                            swal({
-                                title: "THất bại!",
-                                text: res?.message,
-                                icon: "warning",
-                                button: "OK",
-                            })
-                        }
-                    },
-                    error: function(error){
-                        $('.spinner').hide();
-                        swal({
-                            title: "THất bại!",
-                            text: res?.message,
-                            icon: "warning",
-                            button: "OK",
-                        })
-                    }
-                });
-            })
-        });
-    </script>
-@endsection

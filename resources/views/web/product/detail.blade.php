@@ -7,10 +7,14 @@
         "Chi tiết sản phẩm",
         $product->name
     ]
-
     ?>
     <?php
      $galleryProduct = json_decode($product->feature_image, true);
+     $mainImage = $product->image;
+     $mainImageIndex = array_search($mainImage, $galleryProduct);
+
+     // Set the activeImageIndex
+     $activeImageIndex = $mainImageIndex !== false ? $mainImageIndex : 0;
     ?>
     @include('web.breadcrumb.breadcrumb',['breadcrumbList' => $breadCrumbList, 'title' => $product->name])
     @include('web.elements.modal_contact')
@@ -22,7 +26,7 @@
                         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
                             <div class="product-image">
                                 <div class="product_img_box">
-                                    <img id="product_img" src="{{ @$galleryProduct[1] }}" data-zoom-image="{{ @$galleryProduct[1] }}" alt="product_img1">
+                                    <img id="product_img" src="{{ $mainImage }}" data-zoom-image="{{ $mainImage }}" alt="product_img1">
                                     <a class="product_img_zoom" href="#" title="Zoom">
                                         <span class="linearicons-zoom-in">
                                         </span>
@@ -32,7 +36,7 @@
                                     @if(!empty($galleryProduct))
                                         @foreach($galleryProduct as $key => $url)
                                         <div class="item">
-                                            <a class="product_gallery_item {{$key % 2 == 0 ? "active" : ""}}" href="#" data-image="{{ $url }}" data-zoom-image="{{$url}}">
+                                            <a class="product_gallery_item @if ($activeImageIndex === $key) active @endif" href="#" data-image="{{ $url }}" data-zoom-image="{{$url}}">
                                                 <img src="{{$url}}" alt="product_small_img1">
                                             </a>
                                         </div>
@@ -127,6 +131,7 @@
                                     <li class="nav-item"><a class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">Mô tả</a></li>
                                     <li class="nav-item"><a class="nav-link" id="Additional-info-tab" data-toggle="tab" href="#Additional-info" role="tab" aria-controls="Additional-info" aria-selected="false">Thông tin bổ sung</a></li>
                                     <li class="nav-item"><a class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Review" role="tab" aria-controls="Reviews" aria-selected="false">Đánh giá</a></li>
+{{--                                    <li class="nav-item"><a class="nav-link" id="Comment-tab" data-toggle="tab" href="#Comment" role="tab" aria-controls="Comments" aria-selected="false">Bình luận</a></li>--}}
                                 </ul>
                                 <div class="tab-content shop_info_tab">
                                     <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
@@ -185,6 +190,9 @@
                                             </form>
                                         </div>
                                     </div>
+{{--                                    <div class="tab-pane fade" id="Comment" role="tabpanel" aria-labelledby="Comment-tab">--}}
+{{--                                        @include('web.product.element.product_comment',['product' => $product])--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -322,6 +330,48 @@
                         $('.spinner').hide();
                         swal({
                             title: "Đánh giá thất bại",
+                            text: res?.message,
+                            icon: "warning",
+                            button: "OK",
+                        })
+                    }
+                });
+            })
+            $(".form_contact").submit(function (e){
+                e.preventDefault();
+                $('.spinner').show();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'post',
+                    dataType: 'json',
+                    data: $(this).serialize(),
+                    success: function(res){
+                        if(res.success){
+                            $('.spinner').hide();
+                            $('#modalContact').modal('hide');
+                            swal({
+                                title: "Thành công!",
+                                text: res?.message,
+                                icon: "success",
+                                button: "OK",
+                            }).then(() => {
+                                $(".form_contact :input").val('');
+                            })
+                        }else{
+                            $('.spinner').hide();
+                            swal({
+                                title: "THất bại!",
+                                text: res?.message,
+                                icon: "warning",
+                                button: "OK",
+                            })
+                        }
+                    },
+                    error: function(error){
+                        $('.spinner').hide();
+                        $('#modalContact').modal('hide');
+                        swal({
+                            title: "THất bại!",
                             text: res?.message,
                             icon: "warning",
                             button: "OK",
