@@ -204,22 +204,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="heading_s1">
-                                <h3>Sản phẩm tương tự</h3>
-                            </div>
-                            <div class="releted_product_slider carousel_slider owl-carousel owl-theme" data-margin="20" data-responsive="{&quot;0&quot;:{&quot;items&quot;: &quot;1&quot;}, &quot;481&quot;:{&quot;items&quot;: &quot;2&quot;}, &quot;768&quot;:{&quot;items&quot;: &quot;3&quot;}, &quot;1199&quot;:{&quot;items&quot;: &quot;4&quot;}}">
-                                @if(!empty($otherProduct) && !$otherProduct->isEmpty())
-                                    @foreach($otherProduct as $key => $value)
-                                        <div class="item">
-                                            @include('web.components.shop.shop-product-item',['data' => $value])
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="row">--}}
+{{--                        <div class="col-12">--}}
+{{--                            <div class="heading_s1">--}}
+{{--                                <h3>Sản phẩm tương tự</h3>--}}
+{{--                            </div>--}}
+{{--                            <div class="product_slider carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive="{&quot;0&quot;:{&quot;items&quot;: &quot;1&quot;}, &quot;481&quot;:{&quot;items&quot;: &quot;2&quot;}, &quot;768&quot;:{&quot;items&quot;: &quot;3&quot;}, &quot;1199&quot;:{&quot;items&quot;: &quot;4&quot;}}">--}}
+{{--                                @if(!empty($otherProduct) && !$otherProduct->isEmpty())--}}
+{{--                                    @foreach($otherProduct as $key => $value)--}}
+{{--                                        <div class="item">--}}
+{{--                                            @include('web.components.shop.shop-product-item',['data' => $value])--}}
+{{--                                        </div>--}}
+{{--                                    @endforeach--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="col-xl-3 col-lg-4 order-lg-first mt-4 pt-2 mt-lg-0 pt-lg-0">
                     <div class="sidebar">

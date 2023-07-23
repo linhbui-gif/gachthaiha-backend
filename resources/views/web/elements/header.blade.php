@@ -75,86 +75,20 @@ $menuDetail = $menuTop->detail;
                             @if(!empty($listCategory))
                                 @foreach($listCategory as $key => $value)
                                     @php $href = route('web.product.category', ['link' => $value->link]); @endphp
-                                    <li class="dropdown @if(!$value->child->isEmpty()) dropdown-mega-menu @endif">
+                                    <li class="dropdown">
                                         <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"> {{ $value->name }}</a>
                                         @if(!$value->child->isEmpty())
-                                        <div class="dropdown-menu">
-                                            <ul class="mega-menu d-lg-flex">
-                                                <li class="mega-menu-col col-lg-4">
-                                                    <ul>
-                                                        <li class="dropdown-header">Bán chạy</li>
-                                                        @foreach($value->child as $k => $v)
+                                            <div class="dropdown-menu">
+                                                <ul>
+                                                    @foreach($value->child as $k => $v)
                                                         <li><a class="dropdown-item nav-link nav_item" href="{{ route('web.product.category', ['link' => $v->link]) }}">{{ $v->name }}</a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         @endif
                                     </li>
                                 @endforeach
                             @endif
-{{--                            <li class="dropdown"><a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#">Gạch trang trí</a>--}}
-{{--                                <div class="dropdown-menu">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Gạch sân vườn</a>--}}
-{{--                                <div class="dropdown-menu">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Ngói lợp</a>--}}
-{{--                                <div class="dropdown-menu">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Phụ kiện</a>--}}
-{{--                                <div class="dropdown-menu">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Sản phẩm khác</a>--}}
-{{--                                <div class="dropdown-menu">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                            <li class="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Sàn gỗ</a>--}}
-{{--                                <div class="dropdown-menu">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                        <li><a class="dropdown-item nav-link nav_item" href="/">Gạch việt nhật</a></li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-
                         </ul>
                     </div>
                     <ul class="navbar-nav attr-nav align-items-center">
@@ -173,16 +107,6 @@ $menuDetail = $menuTop->detail;
                                 <?php $cart = Cart::count(); ?>
                                 <i class="linearicons-cart"></i>
                                 <span class="cart_count">{{$cart ?? 0}}</span></a>
-{{--                            <div class="cart_box dropdown-menu dropdown-menu-right">--}}
-{{--                                <ul class="cart_list">--}}
-{{--                                    <li><a class="item_remove" href="#"><i class="ion-close"></i></a><a href="#"><img src="assets/images/cart_thamb1.jpg" alt="cart_thumb1">Variable product 001</a><span class="cart_quantity">1 x<span class="cart_amount"><span class="price_symbole">$</span></span>78.00</span></li>--}}
-{{--                                    <li><a class="item_remove" href="#"><i class="ion-close"></i></a><a href="#"><img src="assets/images/cart_thamb2.jpg" alt="cart_thumb2">Ornare sed consequat</a><span class="cart_quantity">1 x<span class="cart_amount"><span class="price_symbole">$</span></span>81.00</span></li>--}}
-{{--                                </ul>--}}
-{{--                                <div class="cart_footer">--}}
-{{--                                    <p class="cart_total"><strong>Subtotal:</strong><span class="cart_price"><span class="price_symbole">$</span></span>159.00</p>--}}
-{{--                                    <p class="cart_buttons"><a class="btn btn-fill-line rounded-0 view-cart" href="#">View Cart</a><a class="btn btn-fill-out rounded-0 checkout" href="#">Checkout</a></p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                         </li>
                     </ul>
                 </nav>

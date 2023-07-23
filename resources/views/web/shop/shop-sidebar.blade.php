@@ -12,16 +12,16 @@
     $productType = \App\Libs\WebLib::getProductType();
 @endphp
 @php
-    if(!empty($category)){
-     if(empty($category->parent_id)){
-        $parentId = $category->id;
+     if(!empty($category)){
+         if(empty($category->parent_id)){
+            $parentId = $category->id;
+         }else{
+           $parentId = $category->parent_id;
+         }
+         $listProductCategory = \App\Libs\WebLib::getProductCategoryByParent($parentId);
      }else{
-       $parentId = $category->parent_id;
-     }
-     $listProductCategory = \App\Libs\WebLib::getProductCategoryByParent($parentId);
-      }else{
-      if(!empty($isBrandPage) && !empty($brand)){
-       $listProductCategory = \App\Libs\WebLib::getProductCategoryByBrandId($brand->id);
+      if(!empty($isBrandPage) && !empty($brandItem)){
+       $listProductCategory = \App\Libs\WebLib::getProductCategoryByBrandId($brandItem->id);
        }else{
        $listProductCategory = \App\Libs\WebLib::getProductCategory();
        }
@@ -37,7 +37,8 @@
                 <ul class="widget_categories">
                     @if(!empty($listProductCategory) && !$listProductCategory->isEmpty())
                         @foreach($listProductCategory as $key => $value)
-                            <li><a href="{{ route('web.product.category', ['link' => $value->link]) }}"><span class="categories_name">{{ $value->name }}</span></a></li>
+                            <li><a href="{{ route('web.product.category', ['link' => $value->link]) }}"><span
+                                            class="categories_name">{{ $value->name }}</span></a></li>
                         @endforeach
                     @endif
                 </ul>
@@ -120,23 +121,26 @@
                 @endif
             </ul>
         </div>
-        <button class="btn btn-fill-out btn-sm mt-3 mb-3" >Lọc sản phẩm</button>
+        <button class="btn btn-fill-out btn-sm mt-3 mb-3">Lọc sản phẩm</button>
     </form>
     <div class="widget mt-2">
         <h5 class="widget_title">Sản phẩm mới nhất</h5>
         <ul class="widget_recent_post">
             @if(!empty($newestProduct))
                 @foreach($newestProduct as $key => $value)
-                 <li>
-                <div class="post_img"><a href="{{route('web.product.detail', ['link' => $value->link])}}"><img
-                                src="{{$value->image}}"
-                                alt="shop_small1"></a></div>
-                <div class="post_content">
-                    <h6 class="product_title"><a href="{{route('web.product.detail', ['link' => $value->link])}}">{{$value->name}}</a></h6>
-                    <div class="product_price"><span class="price">{{ number_format($value->price) }}₫ /m2</span>
-                    </div>
-                </div>
-            </li>
+                    <li>
+                        <div class="post_img"><a href="{{route('web.product.detail', ['link' => $value->link])}}"><img
+                                        src="{{$value->image}}"
+                                        alt="shop_small1"></a></div>
+                        <div class="post_content">
+                            <h6 class="product_title"><a
+                                        href="{{route('web.product.detail', ['link' => $value->link])}}">{{$value->name}}</a>
+                            </h6>
+                            <div class="product_price"><span
+                                        class="price">{{ number_format($value->price) }}₫ /m2</span>
+                            </div>
+                        </div>
+                    </li>
                 @endforeach
             @endif
         </ul>
