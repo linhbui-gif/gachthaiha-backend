@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/simple-line-icons.css') }}">
     <!-- - owl carousel CSS-->
     <link rel="stylesheet" href="{{ asset('assets/frontend/owlcarousel/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/frontend/owlcarousel/css/owl.theme.css') }}owlcarousel/css/owl.theme.css">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/owlcarousel/css/owl.theme.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/owlcarousel/css/owl.theme.default.min.css') }}">
     <!-- Magnific Popup CSS-->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/magnific-popup.cs') }}s">

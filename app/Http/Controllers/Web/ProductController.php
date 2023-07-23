@@ -96,21 +96,20 @@ class ProductController extends Controller
      */
     public function brand($link)
     {
-        $brand = Brand::link($link)
+        $brandItem = Brand::link($link)
             ->where('status', BaseModel::STATUS_ACTIVE)->first();
-
-        if (empty($brand)) {
+        if (empty($brandItem)) {
             abort(404);
         }
 
-        $listProduct = Product::brandId($brand->id)->where('status', BaseModel::STATUS_ACTIVE)->orderBy('id', 'desc')->paginate(12);
+        $listProduct = Product::brandId($brandItem->id)->where('status', BaseModel::STATUS_ACTIVE)->orderBy('id', 'desc')->paginate(12);
 
         $newestProduct = Product::orderBy('id', 'desc')
             ->where('status', BaseModel::STATUS_ACTIVE)->limit(3)->get();
 
         $isBrandPage = true;
 
-        return view('web.product.index', compact('listProduct', 'brand', 'newestProduct', 'isBrandPage'));
+        return view('web.product.index', compact('listProduct', 'brandItem', 'newestProduct', 'isBrandPage'));
     }
 
 
