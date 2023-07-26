@@ -31,10 +31,17 @@ class CartController extends Controller
     {
         Cart::update($id, $quantity);
         $html = view('web.cart.cart-item');
+        $cart = Cart::content();
+        $total = array_reduce($cart->toArray(), function ($carry, $item) {
+            return $carry + ($item['price'] * $item['qty']);
+        }, 0);
         return response()->json([
             'success' => true,
             'message' => 'Cập nhật giỏ hàng thành công',
-            'html' => $html->render()
+            'html' => $html->render(),
+            'total' => number_format($total) . "₫",
+            'is_empty_cart' => $quantity == 0,
+            'number_product' => Cart::count()
         ]);
     }
 

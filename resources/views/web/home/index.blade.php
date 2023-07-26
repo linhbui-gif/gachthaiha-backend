@@ -1,5 +1,4 @@
 @extends('web.layouts.layout')
-@section('title', 'Trang chủ')
 @section('seo')
     @include('web.elements.seo',[
     'title' => "Gạch ốp lát thái hà - Số 123 Thái Hà, Hà Nội",
