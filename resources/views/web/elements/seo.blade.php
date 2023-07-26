@@ -45,8 +45,8 @@ $domain = getenv('APP_URL');
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#fff">
 <meta name="apple-mobile-web-app-title" content="{{ $domain }}">
-<link rel="apple-touch-icon" href="http://{{ $domain }}/images/icon-152x152.png">
-<meta name="msapplication-TileImage" content="http://{{ $domain }}/images/icon-144x144.png">
+<link rel="apple-touch-icon" href="http://{{ $domain }}/upload/images/icon-152x152.png">
+<meta name="msapplication-TileImage" content="http://{{ $domain }}/upload/images/icon-144x144.png">
 <meta name="msapplication-TileColor" content="#fff">
 <link rel="manifest" href="http://{{ $domain }}/js/pwa/manifest.json"/>
 <script type="application/ld+json">

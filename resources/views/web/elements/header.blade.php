@@ -7,7 +7,7 @@ $menuDetail = $menuTop->detail;
     <div class="top-header">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-6 col-md-8  mb-2 mb-lg-0">
                     <div class="header_topbar_info">
                         <div class="header_offer"><span>{{ \App\Libs\WebLib::getSetting(\App\Models\Setting::ADDRESS) }}</span></div>
                         <div class="header_offer"><span><i class="fa fa-clock mr-2"></i>8:30 - 17:30</span></div>
@@ -15,7 +15,7 @@ $menuDetail = $menuTop->detail;
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-4">
-                    <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-end flex-wrap">
                         @if(!empty($menuDetail))
                             @foreach($menuDetail as $key => $value)
                               <div class="header_offer"><a style="color:white" href="{{$value->link}}">{{$value->title}}</a></div>

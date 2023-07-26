@@ -2203,7 +2203,6 @@ button:focus {
 }
 
 .navbar-toggler {
-    float: right;
     margin: 13px 0 0 3px;
     font-size: 28px;
     color: #333;
@@ -6020,6 +6019,7 @@ footer .widget_title {
     -webkit-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+    width: 100%;
 }
 
 .product_img .product_hover_img {
@@ -6175,18 +6175,18 @@ footer .widget_title {
     overflow: hidden;
 }
 
-.product_img::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
-    z-index: 1;
-}
+/*.product_img::before {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    top: 0;*/
+/*    background-color: rgba(0, 0, 0, 0.2);*/
+/*    opacity: 0;*/
+/*    transition: all 0.5s ease-in-out;*/
+/*    z-index: 1;*/
+/*}*/
 
 .product:hover .product_img:before,
 .product_box:hover .product_img:before {
