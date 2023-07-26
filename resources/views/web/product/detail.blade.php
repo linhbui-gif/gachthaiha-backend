@@ -1,5 +1,13 @@
 @extends('web.layouts.layout')
 @section('title', $product->name)
+@section('seo')
+    @include('web.elements.seo',[
+    'title' => $product->name,
+    'description' => $product->detail,
+    'image' => $product->image,
+    'keyword' => $product->category->name ?? ''
+    ])
+@endsection
 @section('content')
     <?php
     $breadCrumbList = [

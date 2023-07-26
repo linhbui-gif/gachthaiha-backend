@@ -1,5 +1,12 @@
 @extends('web.layouts.layout')
 @section('title', $page->name)
+@section('seo')
+    @include('web.elements.seo',[
+    'title' => $page->name,
+    'description' => $page->detail,
+    'keyword' => $page->name ?? ''
+    ])
+@endsection
 @section('content')
     <?php
     $breadCrumbList = [
@@ -13,7 +20,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="term_conditions">
-                       {!! $page->deta !!}
+                       {!! $page->detail !!}
                     </div>
                 </div>
             </div>
