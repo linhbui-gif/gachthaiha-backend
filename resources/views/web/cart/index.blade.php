@@ -9,11 +9,16 @@
     ?>
     @include('web.breadcrumb.breadcrumb',['breadcrumbList' => $breadCrumbList, 'title' => 'Giỏ hàng'])
 
-    <div class="section">
+    <div class="section cart-page">
         <?php $cart = Cart::content();
-        $totalAmount = 0;
+        function sumCart(array $arr) {
+            return array_reduce($arr, function ($carry, $item) {
+                return $carry + ($item['price'] * $item['qty']);
+            }, 0);
+        }
+        $totalAmount = sumCart($cart->toArray());
         ?>
-        @if(!$cart->isEmpty())
+        @if(!empty($cart->toArray()))
         <div class="container">
             <form action="{{ route('web.cart.index') }}" method="post" novalidate="" class="margin-bottom-0">
             <div class="row">
@@ -27,7 +32,7 @@
                                 <th class="product-name">Tên sản phẩm</th>
                                 <th class="product-price">Đơn giá</th>
                                 <th class="product-quantity">Số lượng</th>
-                                <th class="product-subtotal">Số lượng</th>
+                                <th class="product-subtotal">Tạm tính</th>
                                 <th class="product-remove">Xoá</th>
                             </tr>
                             </thead>
@@ -66,7 +71,6 @@
                                 </td>
                                      @php
                                          $amount = $value->qty * $value->price;
-                                         $totalAmount += $amount;
                                      @endphp
                                 <td class="product-subtotal" data-title="Total">{{ number_format($amount) }}₫</td>
                                 <td class="product-remove" data-title="Remove"><a href="{{ route('web.cart.delete', ['id' => $value->rowId]) }}"
@@ -92,13 +96,13 @@
                 <div class="col-md-12">
                     <div class="border p-3 p-md-4">
                         <div class="heading_s1 mb-3">
-                            <h6>Cart Totals</h6>
+                            <h6>Tổng số tiền trong giỏ hàng</h6>
                         </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <td class="cart_total_label">Tạm tính</td>
+                                    <td class="cart_total_label">Tổng</td>
                                     <td class="cart_total_amount"><strong>{{ number_format($totalAmount) }}₫</strong></td>
                                 </tr>
                                 </tbody>
@@ -137,6 +141,8 @@
                         if (res.success) {
                             $('.spinner').hide();
                             $(".cart-item-render").html(res.html);
+                            $(".cart_total_amount strong").html(res.total);
+                            $(".cart_count").html(res.number_product)
                             Swal.fire({
                                 icon: 'success',
                                 text: 'Cập nhật giỏ hàng thành công',
@@ -174,6 +180,17 @@
                         if (res.success) {
                             $('.spinner').hide();
                             $(".cart-item-render").html(res.html);
+                            $(".cart_total_amount strong").html(res.total);
+                            $(".cart_count").html(res.number_product)
+                            if(res.is_empty_cart){
+                                $(".cart-page").html(`
+                                <div class="text-center">
+                                    <img src="https://ebook-demo.netlify.app/static/media/image-empty.2b0b05a6.png" alt="not-have-product">
+                                    <p>Không có sản phẩm nào trong giỏ hàng </p>
+                                    <a href="/san-pham" class="btn btn-fill-out">Tiếp tục mua hàng</a>
+                                </div>
+                                `)
+                            }
                             Swal.fire({
                                 icon: 'success',
                                 text: 'Cập nhật giỏ hàng thành công',

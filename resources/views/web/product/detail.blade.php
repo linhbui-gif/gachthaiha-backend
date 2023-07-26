@@ -1,5 +1,4 @@
 @extends('web.layouts.layout')
-@section('title', $product->name)
 @section('seo')
     @include('web.elements.seo',[
     'title' => $product->name,
