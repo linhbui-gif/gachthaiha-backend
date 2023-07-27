@@ -108,11 +108,11 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="{{ route('admin.product_comment.index') }}">
-                            <i class="fa fa-comments"></i> Bình luận sản phẩm
-                        </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="{{ route('admin.product_comment.index') }}">--}}
+{{--                            <i class="fa fa-comments"></i> Bình luận sản phẩm--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
                     <li>
                         <a href="{{ route('admin.product_review.index') }}">
@@ -164,13 +164,13 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    @if($admin->can(config('permission.list.customer_review.list')))
-                        <li>
-                            <a href="{{ route('admin.customer_review.index') }}">
-                                <i class="fa fa-commenting-o"></i> Khách hàng review
-                            </a>
-                        </li>
-                    @endif
+{{--                    @if($admin->can(config('permission.list.customer_review.list')))--}}
+{{--                        <li>--}}
+{{--                            <a href="{{ route('admin.customer_review.index') }}">--}}
+{{--                                <i class="fa fa-commenting-o"></i> Khách hàng review--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
                     @if($admin->can(config('permission.list.contact.list')))
                         <li>
                             <a href="{{ route('admin.contact.index') }}">
@@ -198,6 +198,13 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @if($admin->can(config('permission.list.config.list')))
+                    <li>
+                        <a href="{{ route('admin.config.index') }}">
+                            <i class="fa fa-gear"></i> {{ trans('admin.config') }}
+                        </a>
+                    </li>
+                    @endif
                     @if($admin->can(config('permission.list.setting.list')))
                         <li>
                             <a href="{{ route('admin.setting.index') }}">

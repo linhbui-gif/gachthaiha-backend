@@ -19,7 +19,7 @@ class ProductController extends ResourceController
     protected $viewPath = 'product';
     protected $name = 'Sản phẩm';
     protected $route = 'product';
-
+    protected $seo = true;
 
     public function __construct()
     {

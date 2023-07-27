@@ -259,6 +259,13 @@ return [
             'create'    => 'brand.create',
             'update'    => 'brand.update',
             'delete'    => 'brand.delete'
+        ],
+        'config' => [
+            'list'      => 'config.list',
+            'store'    => 'config.store',
+            'create'    => 'config.create',
+            'update'    => 'config.update',
+            'delete'    => 'config.delete'
         ]
     ]
 ];

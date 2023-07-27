@@ -1,9 +1,7 @@
 <?php
 $domain = getenv('APP_URL');
 ?>
-@if(!empty($title))
 <title>{{ $title }}</title>
-@endif
 
 <meta name='description' content='{{ !empty($description) ? $description : '' }}'/>
 <meta name='keywords' content='{{ !empty($keyword) ? $keyword : '' }}'/>

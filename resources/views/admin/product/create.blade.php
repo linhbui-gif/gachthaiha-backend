@@ -118,7 +118,7 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
-
+                {!! \App\Libs\SeoLib::adminSEOBox(\App\Models\News::class, !empty($seo) ? $seo : '') !!}
             </div>
 
             <div class="col-sm-3">

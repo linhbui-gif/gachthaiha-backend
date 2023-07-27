@@ -83,7 +83,7 @@
                     <div class="col-sm-6 col-xs-6">
                         <div class="form-group">
                             {!! Form::button('<i class="fa fa-search"></i> Lọc dữ liệu', ['type' => 'submit', 'class' => 'btn btn-warning btn_submit', 'data-type' => 'search']) !!}
-                            {!! Form::button('<i class="fa fa-file-excel-o"></i> Xuất excel', ['type' => 'submit', 'class' => 'btn btn-primary btn_submit', 'data-type' => 'excel']) !!}
+{{--                            {!! Form::button('<i class="fa fa-file-excel-o"></i> Xuất excel', ['type' => 'submit', 'class' => 'btn btn-primary btn_submit', 'data-type' => 'excel']) !!}--}}
                         </div>
                     </div>
                     <div class="col-sm-6 col-xs-6 text-right">

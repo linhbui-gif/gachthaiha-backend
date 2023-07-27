@@ -39,20 +39,18 @@ class SeoLib
      */
     public static function generateSEO($type, $id)
     {
-        return Cache::remember('seo::'.$type.'::'.$id, now()->addMinute(60), function () use ($type, $id) {
-            $seo = Seo::where('type', $type)->where('object_id', $id)->first();
-            $title = !empty($seo->title) ? $seo->title : '';
-            $description = !empty($seo->description) ? $seo->description : '';
-            $keyword = !empty($seo->keyword) ? $seo->keyword : '';
-            $image = !empty($seo->image) ? $seo->image : WebLib::getSetting(Setting::HOME_SEO_IMAGE);
+        $seo = Seo::where('type', $type)->where('object_id', $id)->first();
+        $title = !empty($seo->title) ? $seo->title : '';
+        $description = !empty($seo->description) ? $seo->description : '';
+        $keyword = !empty($seo->keyword) ? $seo->keyword : '';
+        $image = !empty($seo->image) ? $seo->image : WebLib::getSetting(Setting::HOME_SEO_IMAGE);
 
-            return view('web.elements.seo', [
-                'title' => $title,
-                'description' => $description,
-                'keyword' => $keyword,
-                'image' => $image
-            ])->render();
-        });
+        return view('web.elements.seo', [
+            'title' => $title,
+            'description' => $description,
+            'keyword' => $keyword,
+            'image' => $image
+        ])->render();
     }
 
     /**
@@ -85,7 +83,8 @@ class SeoLib
             'object_id'     => $id,
             'title'         => $request->seo_title,
             'description'   => $request->seo_description,
-            'keyword'        => $request->seo_keyword
+            'keyword'        => $request->seo_keyword,
+            'image'        => $request->image,
         ];
         Seo::insert($insert);
     }

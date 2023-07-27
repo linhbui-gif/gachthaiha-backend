@@ -108,5 +108,6 @@ return [
     'add_tour_attribute'        => 'Thêm mới thuộc tính Tour',
     'parent'                    => 'Cấp cha',
     'position'                  => 'Vị trí',
+    'config'                  => 'Cấu hình',
 ];
 ?>

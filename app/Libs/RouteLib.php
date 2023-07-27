@@ -9,7 +9,6 @@ class RouteLib
     public static function generateRoute($prefix, $controller, $name)
     {
         Route::prefix($prefix)->group(function () use ($controller, $name) {
-
             Route::group(['middleware' => ['permission:' . config('permission.list.' . $name . '.list') . ':admin']],
                 function () use ($controller, $name) {
                     Route::get('/', $controller . '@index')->name('admin.' . $name . '.index');

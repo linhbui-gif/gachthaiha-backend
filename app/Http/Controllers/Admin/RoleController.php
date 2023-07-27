@@ -131,7 +131,6 @@ class RoleController extends ResourceController
 
         }catch (\Exception $ex) {
             DB::rollBack();
-            dd($ex);
             return response()->json([
                 'success' => false, 'message' => 'Có lỗi trong quá trình xử lý. Mời thử lại. Exception: ' . $ex->getMessage()
             ]);

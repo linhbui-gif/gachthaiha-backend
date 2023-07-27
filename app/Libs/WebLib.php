@@ -2,7 +2,6 @@
 
 namespace App\Libs;
 
-use App\Models\Advantage;
 use App\Models\BaseModel;
 use App\Models\Banner;
 use App\Models\Brand;
@@ -15,9 +14,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductSurface;
 use App\Models\ProductType;
-use App\Models\Service;
 use App\Models\Setting;
-use App\Models\Shop;
 use App\Models\Size;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -34,11 +31,6 @@ class WebLib
      */
     private static function getBanner($position)
     {
-//        return Cache::remember('banner::' . $position, now()->addMinute(60), function () use ($position) {
-//            return Banner::where('position', $position)
-//                ->where('status', BaseModel::STATUS_ACTIVE)
-//                ->with('detail')->first();
-//        });
         return Banner::where('position', $position)
             ->where('status', BaseModel::STATUS_ACTIVE)
             ->with('detail')->first();

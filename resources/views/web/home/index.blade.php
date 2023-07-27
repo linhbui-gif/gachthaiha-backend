@@ -1,10 +1,10 @@
 @extends('web.layouts.layout')
 @section('seo')
     @include('web.elements.seo',[
-    'title' => "Gạch ốp lát thái hà - Số 123 Thái Hà, Hà Nội",
-    'description' => "Kho gạch ốp lát lớn nhất Việt Nam. Gạch trang trí, kiến trúc và ngói lợp mái giá rẻ tốt nhất.",
-    'image' => "https://gachthaiha.hapisolution.com/assets/frontend/images/logo.png",
-    'keyword' => "gạch ốp lát,gạch nhà tắm, gạch bể bơi"
+    'title' => $data['config']->seo_title,
+    'description' => $data['config']->seo_description,
+    'image' => $data['config']->image,
+    'keyword' => $data['config']->seo_keyword
     ])
 @endsection
 @section('content')
