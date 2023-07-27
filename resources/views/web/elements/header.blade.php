@@ -1,6 +1,6 @@
 <!-- START HEADER-->
 <?php
-$menuDetail = $menuTop->detail;
+$menuDetail = $data['menuTop']->detail;
 //dd($menuDetail);
 ?>
 <header class="header_wrap">
@@ -29,7 +29,7 @@ $menuDetail = $menuTop->detail;
     <div class="header-wrap-body">
         <div class="middle-header dark_skin">
             <div class="container">
-                <div class="nav_block"><a class="navbar-brand" href="/"><img class="logo_light" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"><img class="logo_dark" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" width="150px" alt="logo"></a>
+                <div class="nav_block"><a class="navbar-brand" href="/"><img class="logo_light" src="{{$data['config']->logo}}" width="150px" alt="logo"><img class="logo_dark" src="{{$data['config']->logo}}" width="150px" alt="logo"></a>
                     <div class="contact_phone order-md-last"><i class="linearicons-phone-wave"></i><span>{{ \App\Libs\WebLib::getSetting(\App\Models\Setting::HOT_LINE_NUMBER) }}</span></div>
                     <div class="product_search_form">
                         <form method="get" action="{{route('web.product.search')}}">

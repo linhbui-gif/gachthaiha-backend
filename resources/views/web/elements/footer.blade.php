@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="widget">
-                        <div class="footer_logo"><a href="#"><img width="150px" src="https://gachtot.vn/wp-content/uploads/2022/06/gach-tot-logo.png" alt="logo"></a></div>
+                        <div class="footer_logo"><a href="#"><img width="150px" src="{{$data['config']->logo}}" alt="logo"></a></div>
                         <p class="mb-3">
                             Gạch ốp lát Thái Hà - 123 Thái Hà, Hà Nội, là một trong những đơn vị đi đầu cung cấp Gạch lát nền, ốp tường và Ngói lợp tại Việt Nam từ 2010.
                         </p>

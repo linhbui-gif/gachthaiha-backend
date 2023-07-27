@@ -14,7 +14,7 @@ class NewsController extends ResourceController
     protected $viewPath = 'news';
     protected $name = 'Tin tức';
     protected $route = 'news';
-    // protected $seo = true;
+     protected $seo = true;
 
 
     public function index()
@@ -54,7 +54,6 @@ class NewsController extends ResourceController
             'image'                 => ['nullable', 'url'],
             'news_category_id'      => ['nullable', 'exists:news_categories,id']
         ]);
-
         return parent::store($request);
     }
 

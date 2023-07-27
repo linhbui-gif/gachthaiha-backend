@@ -1,12 +1,6 @@
 @extends('web.layouts.layout')
-@section('title', $news->name)
 @section('seo')
-    @include('web.elements.seo',[
-    'title' => $news->name,
-    'description' => $news->detail,
-    'keyword' => $news->name ?? '',
-     'image' => $news->image
-    ])
+    {!! \App\Libs\SeoLib::generateSEO("App\Models\News",$news->id) !!}
 @endsection
 @section('content')
     <?php
@@ -36,51 +30,51 @@
                             </div>
                         </div>
                     </div>
-{{--                    <div class="related_post">--}}
-{{--                        <div class="content_title">--}}
-{{--                            <h5>Related posts</h5>--}}
-{{--                        </div>--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-md-6">--}}
-{{--                                <div class="blog_post blog_style2 box_shadow1">--}}
-{{--                                    <div class="blog_img">--}}
-{{--                                        <a href="blog-single.html">--}}
-{{--                                            <img src="assets/images/blog_small_img2.jpg" alt="blog_small_img2">--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="blog_content bg-white">--}}
-{{--                                        <div class="blog_text">--}}
-{{--                                            <h5 class="blog_title"><a href="blog-single.html">On the other hand we provide denounce</a></h5>--}}
-{{--                                            <ul class="list_none blog_meta">--}}
-{{--                                                <li><a href="#"><i class="ti-calendar"></i> April 14, 2018</a></li>--}}
-{{--                                                <li><a href="#"><i class="ti-comments"></i> 2 Comment</a></li>--}}
-{{--                                            </ul>--}}
-{{--                                            <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-6">--}}
-{{--                                <div class="blog_post blog_style2 box_shadow1">--}}
-{{--                                    <div class="blog_img">--}}
-{{--                                        <a href="blog-single.html">--}}
-{{--                                            <img src="assets/images/blog_small_img3.jpg" alt="blog_small_img3">--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="blog_content bg-white">--}}
-{{--                                        <div class="blog_text">--}}
-{{--                                            <h5 class="blog_title"><a href="blog-single.html">Why is a ticket to Lagos so expensive?</a></h5>--}}
-{{--                                            <ul class="list_none blog_meta">--}}
-{{--                                                <li><a href="#"><i class="ti-calendar"></i> April 14, 2018</a></li>--}}
-{{--                                                <li><a href="#"><i class="ti-comments"></i> 2 Comment</a></li>--}}
-{{--                                            </ul>--}}
-{{--                                            <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="related_post">--}}
+                    {{--                        <div class="content_title">--}}
+                    {{--                            <h5>Related posts</h5>--}}
+                    {{--                        </div>--}}
+                    {{--                        <div class="row">--}}
+                    {{--                            <div class="col-md-6">--}}
+                    {{--                                <div class="blog_post blog_style2 box_shadow1">--}}
+                    {{--                                    <div class="blog_img">--}}
+                    {{--                                        <a href="blog-single.html">--}}
+                    {{--                                            <img src="assets/images/blog_small_img2.jpg" alt="blog_small_img2">--}}
+                    {{--                                        </a>--}}
+                    {{--                                    </div>--}}
+                    {{--                                    <div class="blog_content bg-white">--}}
+                    {{--                                        <div class="blog_text">--}}
+                    {{--                                            <h5 class="blog_title"><a href="blog-single.html">On the other hand we provide denounce</a></h5>--}}
+                    {{--                                            <ul class="list_none blog_meta">--}}
+                    {{--                                                <li><a href="#"><i class="ti-calendar"></i> April 14, 2018</a></li>--}}
+                    {{--                                                <li><a href="#"><i class="ti-comments"></i> 2 Comment</a></li>--}}
+                    {{--                                            </ul>--}}
+                    {{--                                            <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text</p>--}}
+                    {{--                                        </div>--}}
+                    {{--                                    </div>--}}
+                    {{--                                </div>--}}
+                    {{--                            </div>--}}
+                    {{--                            <div class="col-md-6">--}}
+                    {{--                                <div class="blog_post blog_style2 box_shadow1">--}}
+                    {{--                                    <div class="blog_img">--}}
+                    {{--                                        <a href="blog-single.html">--}}
+                    {{--                                            <img src="assets/images/blog_small_img3.jpg" alt="blog_small_img3">--}}
+                    {{--                                        </a>--}}
+                    {{--                                    </div>--}}
+                    {{--                                    <div class="blog_content bg-white">--}}
+                    {{--                                        <div class="blog_text">--}}
+                    {{--                                            <h5 class="blog_title"><a href="blog-single.html">Why is a ticket to Lagos so expensive?</a></h5>--}}
+                    {{--                                            <ul class="list_none blog_meta">--}}
+                    {{--                                                <li><a href="#"><i class="ti-calendar"></i> April 14, 2018</a></li>--}}
+                    {{--                                                <li><a href="#"><i class="ti-comments"></i> 2 Comment</a></li>--}}
+                    {{--                                            </ul>--}}
+                    {{--                                            <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text</p>--}}
+                    {{--                                        </div>--}}
+                    {{--                                    </div>--}}
+                    {{--                                </div>--}}
+                    {{--                            </div>--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
                 </div>
                 <div class="col-xl-3 mt-4 pt-2 mt-xl-0 pt-xl-0">
                     @include("web.news.sidebar")

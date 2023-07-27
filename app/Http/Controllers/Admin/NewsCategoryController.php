@@ -14,8 +14,7 @@ class NewsCategoryController extends ResourceController
     protected $viewPath = 'news_category';
     protected $name = 'Danh mục tin tức';
     protected $route = 'news_category';
-    // protected $seo = true;
-
+     protected $seo = true;
 
     /**
      * Index page

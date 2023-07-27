@@ -91,6 +91,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
         RouteLib::generateRoute('settings', 'SettingController', 'setting');
 
+        RouteLib::generateRoute('configs', 'ConfigController', 'config');
+
         RouteLib::generateRoute('banners', 'BannerController', 'banner');
 
         RouteLib::generateRoute('partners', 'PartnerController', 'partner');

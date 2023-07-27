@@ -1,11 +1,6 @@
 @extends('web.layouts.layout')
 @section('seo')
-    @include('web.elements.seo',[
-    'title' => $product->name,
-    'description' => $product->detail,
-    'image' => $product->image,
-    'keyword' => $product->category->name ?? ''
-    ])
+    {!! \App\Libs\SeoLib::generateSEO("App\Models\Product",$product->id) !!}
 @endsection
 @section('content')
     <?php

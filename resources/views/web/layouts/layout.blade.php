@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <link rel="icon" href="{{ asset('assets/frontend/images/favicon.png') }}" type="image/x-icon"/>
+    <link rel="icon" href="{{ $data['config']->favicon }}" type="image/x-icon"/>
     <meta http-equiv="content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Shopwise is Powerful features and You Can Use The Perfect Build this Template For Any eCommerce Website. The template is built for sell Fashion Products, Shoes, Bags, Cosmetics, Clothes, Sunglasses, Furniture, Kids Products, Electronics, Stationery Products and Sporting Goods.">
-    <meta name="keywords" content="ecommerce, electronics store, Fashion store, furniture store,  bootstrap 4, clean, minimal, modern, online store, responsive, retail, shopping, ecommerce store">
-    <title>@yield('title')</title>
-    @yield('seo')
+    @hasSection('title') @yield('title') @else  @yield('seo') @endif
     <!-- Animation CSS-->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/animate.css') }}">
     <!-- Latest Bootstrap min CSS-->
@@ -184,43 +181,6 @@
     <!-- scripts js-->
     <script src="{{ asset('assets/frontend/js/scripts.js') }}"></script>
 @yield('script')
-
-{{--<script type="text/javascript" language="JavaScript">--}}
-{{--    $(document).ready(function () {--}}
-{{--        $('.brand_carousel').owlCarousel({--}}
-{{--            loop: true,--}}
-{{--            margin: 10,--}}
-{{--            responsiveClass: true,--}}
-{{--            responsive: {--}}
-{{--                0: {--}}
-{{--                    items: 1,--}}
-{{--                    nav: true--}}
-{{--                },--}}
-{{--                600: {--}}
-{{--                    items: 3,--}}
-{{--                    nav: false,--}}
-{{--                    loop: true--}}
-{{--                },--}}
-{{--                1000: {--}}
-{{--                    items: 6,--}}
-{{--                    nav: false,--}}
-{{--                    loop: true--}}
-{{--                }--}}
-{{--            }--}}
-{{--        });--}}
-
-{{--        var menuPosition = $('.main-nav').position().top;--}}
-{{--        $(window).scroll(function () {--}}
-{{--            var scrollTop = $(window).scrollTop();--}}
-{{--            console.log(menuPosition + ' ' + scrollTop);--}}
-{{--            if(scrollTop >= menuPosition){--}}
-{{--                $('.main-nav').addClass('menu_fixed');--}}
-{{--            }else{--}}
-{{--                $('.main-nav').removeClass('menu_fixed');--}}
-{{--            }--}}
-{{--        });--}}
-{{--    });--}}
-{{--</script>--}}
 
 </body>
 </html>

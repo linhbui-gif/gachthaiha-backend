@@ -22,7 +22,6 @@ class PermissionMiddleware
         $permissions = is_array($permission)
             ? $permission
             : explode('|', $permission);
-
         foreach ($permissions as $permission) {
             if (auth()->guard($guard)->user()->can($permission)) {
                 return $next($request);
